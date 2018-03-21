@@ -5,96 +5,121 @@ import exception.ParagraphException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 文節
  */
 public class Paragraph {
 
-    private List<Word> wordList;
+	private List<Word> wordList;
 
-    private boolean predicatable;
+	private boolean predicatable;
 
-    public Paragraph(List<Word> words) throws ParagraphException {
-        if(words == null) {
-            throw new ParagraphException("words is null");
-        }
+	public Paragraph(List<Word> words) throws ParagraphException {
+		if (words == null) {
+			throw new ParagraphException("words is null");
+		}
 
-        this.wordList = words;
-    }
+		this.wordList = words;
+	}
 
-    public static List<Paragraph> convertParagraph(List<Word> words) throws ParagraphException {
-        int startIndex = 0;
+	public Paragraph() {
+		wordList = new ArrayList<>();
+	}
 
-        List<Paragraph> list = new ArrayList<>();
-        for(int i = 0; i < words.size(); i++) {
+	public void addWord(Word word) {
+		this.wordList.add(word);
+	}
 
-            Word nextWord = null;
-            try {
-                nextWord = words.get(i+1);
-            } catch (IndexOutOfBoundsException e) {
-                // 握りつぶす
-            }
+	public Word getLastWord() {
 
-            if(Paragraph.isSpritParagraph(words.get(i), nextWord)) {
-                list.add(new Paragraph(words.subList(startIndex, i+1)));
-                startIndex = i+1;
-            }
-        }
+		if (wordList == null) {
+			return null;
+		}
 
-        if(startIndex != 0 && startIndex != words.size()) {
-            list.add(new Paragraph(words.subList(startIndex, words.size())));
-        }
+		return wordList.get(wordList.size() - 1);
+	}
 
-        list.stream().forEach(paragraph -> {
-            paragraph.wordList.stream().forEach(word -> {
-                System.out.println(word.getSurface());
-            });
-            System.out.println("=====================");
-        });
-        return list;
-    }
+	public static List<Paragraph> convertParagraph(List<Word> words) throws ParagraphException {
+		int startIndex = 0;
 
-    /**
-     * 文節の区切り判定
-     *
-     * @param word
-     * @return
-     */
-    private static boolean isSpritParagraph(Word word, Word nextWord) {
+		List<Paragraph> list = new ArrayList<>();
+		words.stream().forEach(word -> {
+			if (isSpritParagraph((word))) {
 
-        if(word.getPartOfSpeechLevel1().equals("助詞")){
-            return true;
-        }
+				if (list.size() == 0) {
+					Paragraph p = new Paragraph();
+					p.addWord(word);
+					list.add(p);
+				} else {
+					if (word.isIndependence()) {
+						if (1 <= list.size() && list.get(list.size() - 1).getWordList().stream().anyMatch(Word::isIndependence)) {
+							Paragraph p = new Paragraph();
+							p.addWord(word);
+							list.add(p);
+						} else {
+							if (word.getPartOfSpeechLevel2().equals("読点")) {
+								list.remove(list.size() - 1);
+							}
+							list.get(list.size() - 1).addWord(word);
+						}
+					} else {
+						list.get(list.size() - 1).addWord(word);
+						Paragraph p = new Paragraph();
+						list.add(p);
+					}
+				}
+			} else if (word.getPartOfSpeechLevel2().equals("読点")) {
+				// 読点は前の文字として扱う
+				list.get(list.size() - 2).addWord(word);
+			} else {
+				if (list.size() == 0) {
+					list.add(new Paragraph());
+				}
+				list.get(list.size() - 1).addWord(word);
+			}
+		});
 
-        if(word.getPartOfSpeechLevel1().equals("動詞") && !nextWord.getPartOfSpeechLevel1().equals("助詞")){
-            return true;
-        }
+		return list;
+	}
 
-        if(word.getPartOfSpeechLevel1().equals("副詞")&& word.getPartOfSpeechLevel2().equals("助詞類接続")){
-            return true;
-        }
+	/**
+	 * 文節の区切り判定
+	 *
+	 * @param word
+	 * @return
+	 */
+	private static boolean isSpritParagraph(Word word) {
 
-        if(word.getPartOfSpeechLevel1().equals("記号") && word.getPartOfSpeechLevel2().equals("読点")) {
-            return true;
-        }
+		if (word.getPartOfSpeechLevel1().equals("助詞")) {
+			return true;
+		}
 
-        if(word.getPartOfSpeechLevel1().equals("記号") && word.getPartOfSpeechLevel2().equals("読点")) {
-            return true;
-        }
+		if (word.getPartOfSpeechLevel1().equals("副詞") && word.getPartOfSpeechLevel2().equals("助詞類接続")) {
+			return true;
+		}
 
-        return false;
-    }
+		if (word.isIndependence()) {
+			return true;
+		}
 
-    public boolean isPredicatable() {
-        return predicatable;
-    }
+		return false;
+	}
 
-    public void setPredicatable(boolean predicatable) {
-        this.predicatable = predicatable;
-    }
+	public boolean isPredicatable() {
+		return predicatable;
+	}
 
-    public List<Word> getWordList() {
-        return Collections.unmodifiableList(this.wordList);
-    }
+	public void setPredicatable(boolean predicatable) {
+		this.predicatable = predicatable;
+	}
+
+	public List<Word> getWordList() {
+		return Collections.unmodifiableList(this.wordList);
+	}
+
+	public String getParagraph() {
+		return wordList.stream().map(word -> word.getSurface()).collect(Collectors.joining());
+	}
 }

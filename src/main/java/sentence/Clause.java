@@ -3,6 +3,7 @@ package sentence;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import exception.ParagraphException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ public class Clause {
         Tokenizer tokenizer = new Tokenizer() ;
         List<Word> list = tokenizer.tokenize(clause).stream().map(Word::new).collect(Collectors.toList());
 
-        this.paragraphList = Paragraph.convertParagraph(list);
+        this.paragraphList = Collections.unmodifiableList(Paragraph.convertParagraph(list));
         
         analize(paragraphList);
     }
@@ -26,8 +27,19 @@ public class Clause {
 
         // 述語の選定
         for (int i = paragraphList.size() -1; i < 0; i--) {
-            if(paragraphList.get(i))
+//            if(paragraphList.get(i))
         }
 
+    }
+
+    /**
+     * 文節リスト
+     *
+     * 文の文節リストを返す。
+     *
+     * @return 文節リスト(変更不可)
+     */
+    public List<Paragraph> getParagraphList() {
+        return paragraphList;
     }
 }
