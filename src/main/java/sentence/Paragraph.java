@@ -16,13 +16,7 @@ public class Paragraph {
 
 	private boolean predicatable;
 
-	public Paragraph(List<Word> words) throws ParagraphException {
-		if (words == null) {
-			throw new ParagraphException("words is null");
-		}
-
-		this.wordList = words;
-	}
+	private WorkType workType;
 
 	public Paragraph() {
 		wordList = new ArrayList<>();
@@ -30,6 +24,12 @@ public class Paragraph {
 
 	public void addWord(Word word) {
 		this.wordList.add(word);
+
+		try {
+			workType = analyse();
+		} catch (Exception e) {
+			workType = null;
+		}
 	}
 
 	public Word getLastWord() {
@@ -72,7 +72,11 @@ public class Paragraph {
 				}
 			} else if (word.getPartOfSpeechLevel2().equals("読点")) {
 				// 読点は前の文字として扱う
-				list.get(list.size() - 2).addWord(word);
+				if(2 <= list.size()) {
+					list.get(list.size() - 2).addWord(word);
+				} else if(1 < list.size()) {
+					list.get(list.size() - 1).addWord(word);
+				}
 			} else {
 				if (list.size() == 0) {
 					list.add(new Paragraph());
@@ -82,6 +86,10 @@ public class Paragraph {
 		});
 
 		return list;
+	}
+
+	public WorkType getWorkType() {
+		return workType;
 	}
 
 	/**
@@ -107,10 +115,6 @@ public class Paragraph {
 		return false;
 	}
 
-	public boolean isPredicatable() {
-		return predicatable;
-	}
-
 	public void setPredicatable(boolean predicatable) {
 		this.predicatable = predicatable;
 	}
@@ -121,5 +125,69 @@ public class Paragraph {
 
 	public String getParagraph() {
 		return wordList.stream().map(word -> word.getSurface()).collect(Collectors.joining());
+	}
+
+	private WorkType analyse() throws Exception {
+		return WorkType.getEnum(wordList);
+	}
+
+	/**
+	 * 主語判定
+	 *
+	 * @param wordList 文節の文言
+	 * @return 判定結果
+	 */
+	public static boolean isSubject(List<Word> wordList) {
+		return wordList.stream().filter(Word::isParticle).anyMatch(word -> {
+			if (word.getSurface().equals("は") || word.getSurface().equals("が") || word.getSurface().equals("も") && !word.getPartOfSpeechLevel1().equals("動詞")) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
+
+	/**
+	 * 述語判定
+	 *
+	 * @param wordList 文節の文言
+	 * @return 判定結果
+	 */
+	public static boolean isPredicate(List<Word> wordList) {
+		return wordList.stream().anyMatch(word -> {
+			if (word.getPartOfSpeechLevel1().equals("動詞")) {
+				return true;
+			} else if(word.getPartOfSpeechLevel1().equals("助動詞")) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	}
+
+	public enum WorkType {
+		SUBJECT("主語"),
+		PREDICATE("述語"),
+		MODIFIER("修飾語"),
+		CONNECTION_WORD("接続語"),
+		INDEPENDENT_WORD("独立語"),;
+
+		public String japanease;
+
+		private WorkType(String japanease) {
+			this.japanease = japanease;
+		}
+
+		public static WorkType getEnum(List<Word> wordList) throws Exception {
+			if (Paragraph.isSubject(wordList)) {
+				return WorkType.SUBJECT;
+			}
+
+			if (Paragraph.isPredicate(wordList)) {
+				return WorkType.PREDICATE;
+			}
+
+			throw new Exception("該当なし");
+		}
 	}
 }
