@@ -99,14 +99,14 @@ public class ClauseTest {
 	public void testPredicate3() throws Exception {
 		Clause c = new Clause("ああ、きれいだなあ、あの人は。");
 		assertEquals("述語判定エラー", "きれいだなあ、", c.getPredicate().getParagraph());
-		assertEquals("主語判定エラー", "人は。", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
+		assertEquals("主語判定エラー:"+ getparaParagraphListStr(c), "人は。", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
 	}
 
 	@Test
 	public void testPredicate4() throws Exception {
 		Clause c = new Clause("山道を登りながら、こう考えた。");
 		assertEquals("述語判定エラー", "考えた。", c.getPredicate().getParagraph());
-		assertEquals("主語判定エラー", null, c.getSubject().get());
+		assertEquals("主語判定エラー", false, c.getSubject().isPresent());
 	}
 
 	private String getparaParagraphListStr(Clause c) {
