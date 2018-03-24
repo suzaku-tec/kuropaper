@@ -85,23 +85,13 @@ public class ClauseTest {
 	public void testPredicate1() throws Exception {
 		Clause c = new Clause("誰も僕の言うことを信じない。");
 		assertEquals("述語判定エラー", "信じない。", c.getPredicate().getParagraph());
-	}
-
-	@Test
-	public void testSubject1() throws Exception {
-		Clause c = new Clause("誰も僕の言うことを信じない。");
 		assertEquals("主語判定エラー", "誰も", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
 	}
 
 	@Test
 	public void testPredicate2() throws Exception {
 		Clause c = new Clause("あの映画のファンが続編を待ち望んでいる。");
-		assertEquals("述語判定エラー", "待ち望んでいる。", c.getPredicate().getParagraph());
-	}
-
-	@Test
-	public void testSubject2() throws Exception {
-		Clause c = new Clause("あの映画のファンが続編を待ち望んでいる。");
+		assertEquals("述語判定エラー", "いる。", c.getPredicate().getParagraph());
 		assertEquals("主語判定エラー", "ファンが", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
 	}
 
@@ -109,11 +99,6 @@ public class ClauseTest {
 	public void testPredicate3() throws Exception {
 		Clause c = new Clause("ああ、きれいだなあ、あの人は。");
 		assertEquals("述語判定エラー", "きれいだなあ、", c.getPredicate().getParagraph());
-	}
-
-	@Test
-	public void testSubject3() throws Exception {
-		Clause c = new Clause("ああ、きれいだなあ、あの人は。");
 		assertEquals("主語判定エラー", "人は。", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
 	}
 
@@ -121,14 +106,8 @@ public class ClauseTest {
 	public void testPredicate4() throws Exception {
 		Clause c = new Clause("山道を登りながら、こう考えた。");
 		assertEquals("述語判定エラー", "考えた。", c.getPredicate().getParagraph());
-	}
-
-	@Test
-	public void testSubject4() throws Exception {
-		Clause c = new Clause("山道を登りながら、こう考えた。");
 		assertEquals("主語判定エラー", null, c.getSubject().get());
 	}
-
 
 	private String getparaParagraphListStr(Clause c) {
 		return c.getParagraphList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.joining(PARAGRAPH_CHAR));
