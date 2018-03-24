@@ -85,28 +85,28 @@ public class ClauseTest {
 	public void testPredicate1() throws Exception {
 		Clause c = new Clause("誰も僕の言うことを信じない。");
 		assertEquals("述語判定エラー", "信じない。", c.getPredicate().getParagraph());
-		assertEquals("主語判定エラー", "誰も", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
+		assertEquals("主語判定エラー", "誰も", c.getSubject().getParagraph());
 	}
 
 	@Test
 	public void testPredicate2() throws Exception {
 		Clause c = new Clause("あの映画のファンが続編を待ち望んでいる。");
 		assertEquals("述語判定エラー", "いる。", c.getPredicate().getParagraph());
-		assertEquals("主語判定エラー", "ファンが", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
+		assertEquals("主語判定エラー", "ファンが", c.getSubject().getParagraph());
 	}
 
 	@Test
 	public void testPredicate3() throws Exception {
 		Clause c = new Clause("ああ、きれいだなあ、あの人は。");
 		assertEquals("述語判定エラー", "きれいだなあ、", c.getPredicate().getParagraph());
-		assertEquals("主語判定エラー:"+ getparaParagraphListStr(c), "人は。", c.getSubject().orElseThrow(() ->new Exception()).getParagraph());
+		assertEquals("主語判定エラー:"+ getparaParagraphListStr(c), "人は。", c.getSubject().getParagraph());
 	}
 
 	@Test
 	public void testPredicate4() throws Exception {
 		Clause c = new Clause("山道を登りながら、こう考えた。");
 		assertEquals("述語判定エラー", "考えた。", c.getPredicate().getParagraph());
-		assertEquals("主語判定エラー", false, c.getSubject().isPresent());
+		assertEquals("主語判定エラー", null, c.getSubject());
 	}
 
 	private String getparaParagraphListStr(Clause c) {
