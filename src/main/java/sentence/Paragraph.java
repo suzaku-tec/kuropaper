@@ -16,13 +16,14 @@ public class Paragraph {
 
 	private WorkType workType;
 
-	private List<Paragraph> similaritys = Collections.emptyList();
+	/** 修飾語リスト */
+	private List<Paragraph> similarities = Collections.emptyList();
 
-	public Paragraph() {
+	private Paragraph() {
 		wordList = new ArrayList<>();
 	}
 
-	public void addWord(Word word) {
+	private void addWord(Word word) {
 		this.wordList.add(word);
 
 		try {
@@ -105,8 +106,8 @@ public class Paragraph {
 	/**
 	 * 文節の区切り判定
 	 *
-	 * @param word
-	 * @return
+	 * @param word 単語
+	 * @return true:文節の区切り false:文節の区切りではない
 	 */
 	private static boolean isSpritParagraph(Word word) {
 
@@ -171,6 +172,9 @@ public class Paragraph {
 		});
 	}
 
+	/**
+	 * 単語の活用タイプ
+	 */
 	public enum WorkType {
 		SUBJECT("主語"),
 		PREDICATE("述語"),
@@ -197,17 +201,32 @@ public class Paragraph {
 		}
 	}
 
-	public List<Paragraph> getSimilaritys() {
-		return similaritys;
+	/**
+	 * 修飾語の取得
+	 *
+	 * この文節にかかっている修飾語を取得する。
+	 * 存在しない場合、空のリストが返される
+	 *
+	 * @return 修飾語リスト
+	 */
+	public List<Paragraph> getSimilarities() {
+		return similarities;
 	}
 
-	public void setSimilaritys(List<Paragraph> similaritys) {
-		this.similaritys = similaritys;
+	/**
+	 * 修飾語の設定
+	 *
+	 * この文節にかかっている修飾語を設定する
+	 *
+	 * @param similarities 修飾語
+	 */
+	public void setSimilarities(List<Paragraph> similarities) {
+		this.similarities = similarities;
 	}
 
 	/**
 	 * 副詞の存在判定
-	 * @return
+	 * @return true:副詞あり false:副詞なし
 	 */
 	public boolean existAdverbs() {
 		return wordList.stream().anyMatch(Word::isAdverbs);

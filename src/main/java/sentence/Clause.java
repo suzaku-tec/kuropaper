@@ -45,19 +45,19 @@ public class Clause {
 	 *
 	 * フェールセーフではない。。。
 	 *
-	 * @param paragraphList
+	 * @param paragraphList 文節リスト
 	 */
 	private void analizeSimilarity(List<Paragraph> paragraphList) {
 		paragraphList.stream().reduce(new ArrayList<Paragraph>(), (result, paragraph) -> {
 			if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType()) || Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
 				if (!result.isEmpty()) {
-					paragraph.setSimilaritys(result);
+					paragraph.setSimilarities(result);
 				}
 				return new ArrayList<>();
 			} else {
 
 				if(result.stream().anyMatch(Paragraph::existAdverbs)) {
-					paragraph.setSimilaritys(result);
+					paragraph.setSimilarities(result);
 					result = new ArrayList<>();
 				}
 
@@ -73,8 +73,8 @@ public class Clause {
 
 	/**
 	 * 述語の設定
-	 * @param paragraphList
-	 * @return
+	 * @param paragraphList 文節リスト
+	 * @return 述語リスト
 	 */
 	private Optional<Paragraph> analizePredicate(List<Paragraph> paragraphList) {
 		List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
@@ -88,7 +88,7 @@ public class Clause {
 	/**
 	 * 文節リストを解析して主語を見つける
 	 *
-	 * @param paragraphList
+	 * @param paragraphList 文節リスト
 	 * @return 主語がない場合は、empty
 	 */
 	private Optional<Paragraph> analizeSubject(List<Paragraph> paragraphList) {
