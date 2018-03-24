@@ -109,6 +109,13 @@ public class ClauseTest {
 		assertEquals("主語判定エラー", null, c.getSubject());
 	}
 
+	@Test
+	public void testSimilarity1() throws Exception {
+		Clause c = new Clause("これは、もっとも優れた作品の一つだ。");
+		List<Paragraph> similarities = c.getSimilarities();
+		assertEquals("修飾語数エラー:" + getparaParagraphListStr(c), 3, similarities.size());
+	}
+
 	private String getparaParagraphListStr(Clause c) {
 		return c.getParagraphList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.joining(PARAGRAPH_CHAR));
 	}
