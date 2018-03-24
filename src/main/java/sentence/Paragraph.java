@@ -14,9 +14,9 @@ public class Paragraph {
 
 	private List<Word> wordList;
 
-	private boolean predicatable;
-
 	private WorkType workType;
+
+	private List<Paragraph> similaritys = Collections.emptyList();
 
 	public Paragraph() {
 		wordList = new ArrayList<>();
@@ -98,6 +98,10 @@ public class Paragraph {
 		return workType;
 	}
 
+	public void setWorkType(WorkType workType) {
+		this.workType = workType;
+	}
+
 	/**
 	 * 文節の区切り判定
 	 *
@@ -119,10 +123,6 @@ public class Paragraph {
 		}
 
 		return false;
-	}
-
-	public void setPredicatable(boolean predicatable) {
-		this.predicatable = predicatable;
 	}
 
 	public List<Word> getWordList() {
@@ -195,5 +195,13 @@ public class Paragraph {
 
 			throw new Exception("該当なし");
 		}
+	}
+
+	public List<Paragraph> getSimilaritys() {
+		return similaritys;
+	}
+
+	public void setSimilaritys(List<Paragraph> similaritys) {
+		this.similaritys = similaritys;
 	}
 }

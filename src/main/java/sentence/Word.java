@@ -126,4 +126,12 @@ public class Word {
 
 		return false;
 	}
+
+	/**
+	 * 助詞判定
+	 * @return true:助詞 false:助詞以外
+	 */
+	public boolean isParticle() {
+		return getPartOfSpeechLevel1().equals("助詞");
+	}
 }

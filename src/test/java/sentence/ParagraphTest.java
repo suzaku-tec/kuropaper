@@ -15,6 +15,9 @@ public class ParagraphTest {
 	public void testPredicate() throws ParagraphException {
 		Clause c = new Clause("誰も僕の言うことを信じない。");
 		List<Paragraph> paragraphList = c.getParagraphList();
+		paragraphList.stream().forEach(paragraph -> paragraph.getWordList().stream().forEach(word -> System.out.println(word.getSurface())));
+		System.out.println("=======================");
+		paragraphList.stream().forEach( p -> System.out.println(p.getParagraph() + ":" + p.getWorkType()));
 		List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
 		assertEquals("述語判定エラー", "信じない。", list.get(list.size() - 1).getParagraph());
 	}
