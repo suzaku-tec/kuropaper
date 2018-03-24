@@ -77,6 +77,12 @@ public class Paragraph {
 				} else if(1 < list.size()) {
 					list.get(list.size() - 1).addWord(word);
 				}
+			} else if (word.getPartOfSpeechLevel2().equals("句点")) {
+				if(list.get(list.size()-1).wordList.isEmpty()) {
+					list.get(list.size() - 2).addWord(word);
+				} else {
+					list.get(list.size() - 1).addWord(word);
+				}
 			} else {
 				if (list.size() == 0) {
 					list.add(new Paragraph());
