@@ -204,4 +204,12 @@ public class Paragraph {
 	public void setSimilaritys(List<Paragraph> similaritys) {
 		this.similaritys = similaritys;
 	}
+
+	/**
+	 * 副詞の存在判定
+	 * @return
+	 */
+	public boolean existAdverbs() {
+		return wordList.stream().anyMatch(Word::isAdverbs);
+	}
 }

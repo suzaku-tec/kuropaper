@@ -134,4 +134,12 @@ public class Word {
 	public boolean isParticle() {
 		return getPartOfSpeechLevel1().equals("助詞");
 	}
+
+	/**
+	 * 副詞判定
+	 * @return
+	 */
+	public boolean isAdverbs() {
+		return getPartOfSpeechLevel1().equals("副詞");
+	}
 }

@@ -55,6 +55,12 @@ public class Clause {
 				}
 				return new ArrayList<>();
 			} else {
+
+				if(result.stream().anyMatch(Paragraph::existAdverbs)) {
+					paragraph.setSimilaritys(result);
+					result = new ArrayList<>();
+				}
+
 				paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
 				result.add(paragraph);
 				return result;
