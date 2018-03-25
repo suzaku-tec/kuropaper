@@ -2,6 +2,7 @@ package sentence;
 
 import exception.ParagraphException;
 import org.junit.Test;
+import sentence.Paragraph.Paragraph;
 
 import java.util.Arrays;
 import java.util.List;

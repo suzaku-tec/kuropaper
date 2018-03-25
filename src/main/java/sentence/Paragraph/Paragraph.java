@@ -1,6 +1,7 @@
-package sentence;
+package sentence.Paragraph;
 
 import exception.ParagraphException;
+import sentence.Word;
 
 import java.util.ArrayList;
 import java.util.Collections;

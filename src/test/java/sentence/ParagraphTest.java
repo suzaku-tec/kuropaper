@@ -2,9 +2,9 @@ package sentence;
 
 import exception.ParagraphException;
 import org.junit.Test;
+import sentence.Paragraph.Paragraph;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;

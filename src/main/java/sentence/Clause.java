@@ -3,6 +3,7 @@ package sentence;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import exception.CauseException;
 import exception.ParagraphException;
+import sentence.Paragraph.Paragraph;
 
 import java.util.ArrayList;
 import java.util.Collections;

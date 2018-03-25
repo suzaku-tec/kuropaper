@@ -1,5 +1,7 @@
 package sentence;
 
+import sentence.Paragraph.Paragraph;
+
 import java.util.ArrayList;
 import java.util.List;
 
