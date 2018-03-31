@@ -18,7 +18,7 @@ public class Clause {
 
 	List<Paragraph> paragraphList;
 
-	private Paragraph subject = null;
+	private List<Paragraph> subjects = null;
 
 	private Paragraph predicate = null;
 
@@ -31,7 +31,8 @@ public class Clause {
 	}
 
 	private void analize(List<Paragraph> paragraphList) {
-		analizeSubject(paragraphList).ifPresent(paragraph -> subject = paragraph);
+		subjects = new ArrayList<>();
+		analizeSubject(paragraphList).orElse(Collections.emptyList()).forEach(paragraph -> subjects.add(paragraph));
 		predicate = analizePredicate(paragraphList).orElseThrow(() -> new CauseException("predicate is not exsist"));
 		paragraphList.stream()
 				.filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType()))
@@ -92,14 +93,14 @@ public class Clause {
 	 * @param paragraphList 文節リスト
 	 * @return 主語がない場合は、empty
 	 */
-	private Optional<Paragraph> analizeSubject(List<Paragraph> paragraphList) {
+	private Optional<List<Paragraph>> analizeSubject(List<Paragraph> paragraphList) {
 		List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())).collect(Collectors.toList());
 
 		if (list == null || list.isEmpty()) {
 			return Optional.empty();
 		}
 
-		return Optional.of(list.get(0));
+		return Optional.of(list);
 	}
 
 	/**
@@ -132,8 +133,8 @@ public class Clause {
 	 *
 	 * @return 主語
 	 */
-	public Paragraph getSubject() {
-		return subject;
+	public List<Paragraph> getSubjects() {
+		return subjects;
 	}
 
 	/**
