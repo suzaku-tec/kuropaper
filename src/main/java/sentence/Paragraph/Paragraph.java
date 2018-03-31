@@ -45,59 +45,36 @@ public class Paragraph {
         return wordList.get(wordList.size() - 1);
     }
 
-    public static List<Paragraph> convertParagraph(List<Word> words) throws ParagraphException {
-        int startIndex = 0;
-
+    public static List<Paragraph> convertParagraph(List<Word> words) {
         List<Paragraph> list = new ArrayList<>();
-        words.stream().forEach(word -> {
-            if (isSpritParagraph((word))) {
-
-                if (list.size() == 0) {
-                    Paragraph p = new Paragraph();
-                    p.addWord(word);
-                    list.add(p);
-                } else {
-                    if (word.isIndependence()) {
-                        if (1 <= list.size() && list.get(list.size() - 1).getWordList().stream().anyMatch(Word::isIndependence)) {
-                            Paragraph p = new Paragraph();
+        Paragraph end = words.stream().reduce(
+                new Paragraph(), // 文節情報を溜めるオブジェクトを生成
+                (Paragraph p, Word word) -> {
+                    if (isSpritParagraph(word)) {
+                        if (word.isIndependence()) {
+                            if (p.getWordList().stream().anyMatch(Word::isIndependence)) {
+                                list.add(p);
+                                p = new Paragraph();
+                            }
+                        } else {
                             p.addWord(word);
                             list.add(p);
-                        } else {
-                            if (word.getPartOfSpeechLevel2().equals("読点")) {
-                                list.remove(list.size() - 1);
-                            }
-                            list.get(list.size() - 1).addWord(word);
+                            return new Paragraph();
                         }
-                    } else {
-                        list.get(list.size() - 1).addWord(word);
-                        Paragraph p = new Paragraph();
-                        list.add(p);
+                    } else if (word.getPartOfSpeechLevel2().equals("読点") || word.getPartOfSpeechLevel2().equals("句点")) {
+                        if (p.getParagraph().isEmpty()) {
+                            // 前の文節の一部として扱う
+                            list.get(list.size() - 1).addWord(word);
+                            return p;
+                        }
                     }
-                }
-            } else if (word.getPartOfSpeechLevel2().equals("読点")) {
-                // 読点は前の文字として扱う
-                if (2 <= list.size()) {
-                    if (list.get(list.size() - 1).getParagraph().isEmpty()) {
-                        list.get(list.size() - 2).addWord(word);
-                    } else {
-                        list.get(list.size() - 1).addWord(word);
-                    }
-                } else if (1 < list.size()) {
-                    list.get(list.size() - 1).addWord(word);
-                }
-            } else if (word.getPartOfSpeechLevel2().equals("句点")) {
-                if (list.get(list.size() - 1).wordList.isEmpty()) {
-                    list.get(list.size() - 2).addWord(word);
-                } else {
-                    list.get(list.size() - 1).addWord(word);
-                }
-            } else {
-                if (list.size() == 0) {
-                    list.add(new Paragraph());
-                }
-                list.get(list.size() - 1).addWord(word);
-            }
-        });
+                    p.addWord(word);
+                    return p;
+                }, (o1, o2) -> null);
+
+        if (!end.getParagraph().isEmpty()) {
+            list.add(end);
+        }
 
         return list;
     }
