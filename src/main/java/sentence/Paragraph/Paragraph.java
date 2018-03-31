@@ -1,6 +1,5 @@
 package sentence.Paragraph;
 
-import exception.ParagraphException;
 import sentence.Word;
 
 import java.util.ArrayList;
@@ -34,15 +33,6 @@ public class Paragraph {
         } catch (Exception e) {
             workType = null;
         }
-    }
-
-    public Word getLastWord() {
-
-        if (wordList == null) {
-            return null;
-        }
-
-        return wordList.get(wordList.size() - 1);
     }
 
     public static List<Paragraph> convertParagraph(List<Word> words) {
