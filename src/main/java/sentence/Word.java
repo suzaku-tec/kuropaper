@@ -127,6 +127,10 @@ public class Word {
 		return false;
 	}
 
+	public boolean isReadingPoint() {
+		return getPartOfSpeechLevel2().equals("読点");
+	}
+
 	/**
 	 * 助詞判定
 	 * @return true:助詞 false:助詞以外

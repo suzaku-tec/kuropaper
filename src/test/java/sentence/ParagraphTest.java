@@ -3,6 +3,7 @@ package sentence;
 import exception.ParagraphException;
 import org.junit.Test;
 import sentence.Paragraph.Paragraph;
+import sentence.clause.Clause;
 
 import java.util.List;
 import java.util.stream.Collectors;

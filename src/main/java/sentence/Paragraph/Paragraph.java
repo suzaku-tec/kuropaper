@@ -75,7 +75,11 @@ public class Paragraph {
 			} else if (word.getPartOfSpeechLevel2().equals("読点")) {
 				// 読点は前の文字として扱う
 				if(2 <= list.size()) {
-					list.get(list.size() - 2).addWord(word);
+					if(list.get(list.size() - 1).getParagraph().isEmpty()) {
+						list.get(list.size() - 2).addWord(word);
+					} else {
+						list.get(list.size() - 1).addWord(word);
+					}
 				} else if(1 < list.size()) {
 					list.get(list.size() - 1).addWord(word);
 				}
@@ -231,5 +235,9 @@ public class Paragraph {
 	 */
 	public boolean existAdverbs() {
 		return wordList.stream().anyMatch(Word::isAdverbs);
+	}
+
+	public boolean existReadingPoint() {
+		return wordList.stream().anyMatch(Word::isReadingPoint);
 	}
 }

@@ -1,8 +1,10 @@
-package sentence;
+package sentence.clause;
 
 import exception.ParagraphException;
 import org.junit.Test;
 import sentence.Paragraph.Paragraph;
+import sentence.Word;
+import sentence.clause.Clause;
 
 import java.util.Arrays;
 import java.util.List;
@@ -126,6 +128,12 @@ public class ClauseTest {
     public void testMultiSubject() throws ParagraphException {
         Clause c = new Clause("姉は家の掃除を手伝い、私は部屋でゲームをする。");
         assertEquals("主語数エラー：" + getparaParagraphListStr(c), 2, c.getSubjects().size());
+    }
+
+    @Test
+    public void testPartsSubject() throws ParagraphException {
+        Clause c = new Clause("私が生まれたふるさとは、リンゴの名産地です。");
+        assertEquals("主語数エラー：" + getparaParagraphListStr(c), 1, c.getSubjects().size());
     }
 
     private String getparaParagraphListStr(Clause c) {
