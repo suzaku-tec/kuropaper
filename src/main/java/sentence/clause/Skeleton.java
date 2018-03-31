@@ -4,11 +4,16 @@ import sentence.Paragraph.Paragraph;
 
 /**
  * 文の骨格情報
+ *
+ * 主語と述語のセット情報を持つ。
+ * 主語は、ない場合がある。
  */
 public class Skeleton {
 
+    /** 主語 */
     public Paragraph subject;
 
+    /** 述語 */
     public Paragraph predicate;
 
     /**
