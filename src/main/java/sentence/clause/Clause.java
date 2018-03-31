@@ -25,15 +25,15 @@ public class Clause {
 
         this.paragraphList = Collections.unmodifiableList(Paragraph.convertParagraph(list));
 
-        analize(paragraphList);
+        analyse(paragraphList);
     }
 
-    private void analize(List<Paragraph> paragraphList) {
+    private void analyse(List<Paragraph> paragraphList) {
         subjects = new ArrayList<>();
 
-        predicate = analizePredicate(paragraphList);
+        predicate = analysePredicate(paragraphList);
 
-        var skeleton = analysisSkeleton(paragraphList);
+        var skeleton = analyseSkeleton(paragraphList);
 
         subjects = skeleton.stream()
                 .filter(list -> !list.isEmpty())
@@ -46,10 +46,10 @@ public class Clause {
                 .filter(paragraph -> !predicate.equals(paragraph))
                 .forEach(paragraph -> paragraph.setWorkType(null));
 
-        analizeSimilarity(paragraphList);
+        analyseSimilarity(paragraphList);
     }
 
-    private Set<List<Skeleton>> analysisSkeleton(List<Paragraph> paragraphList) {
+    private Set<List<Skeleton>> analyseSkeleton(List<Paragraph> paragraphList) {
         Set<List<Skeleton>> skeletonsSet = new HashSet<>();
         List<Skeleton> skeletons = new ArrayList<>();
         skeletonsSet.add(skeletons);
@@ -123,7 +123,7 @@ public class Clause {
      *
      * @param paragraphList 文節リスト
      */
-    private void analizeSimilarity(List<Paragraph> paragraphList) {
+    private void analyseSimilarity(List<Paragraph> paragraphList) {
         paragraphList.stream().reduce(new ArrayList<Paragraph>(), (result, paragraph) -> {
             if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType()) || Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
                 if (!result.isEmpty()) {
@@ -155,7 +155,7 @@ public class Clause {
      * @param paragraphList 文節リスト
      * @return 述語リスト
      */
-    private Paragraph analizePredicate(List<Paragraph> paragraphList) {
+    private Paragraph analysePredicate(List<Paragraph> paragraphList) {
         List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
         if (list == null || list.size() == 0) {
             throw new CauseException("predicate is not exsist");
@@ -197,7 +197,7 @@ public class Clause {
      * @param paragraphList 文節リスト
      * @return 主語がない場合は、empty
      */
-    private Optional<List<Paragraph>> analizeSubject(List<Paragraph> paragraphList) {
+    private Optional<List<Paragraph>> analyseSubject(List<Paragraph> paragraphList) {
         List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())).collect(Collectors.toList());
 
         if (list == null || list.isEmpty()) {
