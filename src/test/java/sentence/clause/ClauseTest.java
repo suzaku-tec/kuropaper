@@ -4,7 +4,6 @@ import exception.ParagraphException;
 import org.junit.Test;
 import sentence.Paragraph.Paragraph;
 import sentence.Word;
-import sentence.clause.Clause;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +19,7 @@ public class ClauseTest {
     public void testParagraph1() throws ParagraphException {
         Clause c = new Clause("山路を登りながら、こう考えた。");
 
-        final String paragraphListStr = getparaParagraphListStr(c);
+        final String paragraphListStr = getParagraphListStr(c);
         assertEquals("文節数不正 : " + paragraphListStr, 4, c.getParagraphList().size());
 
         assertEquals("文節区切り位置不正 : " + paragraphListStr
@@ -36,7 +35,7 @@ public class ClauseTest {
     @Test
     public void testParagraph2() throws ParagraphException {
         Clause c = new Clause("すぐに出発しなければならない。");
-        final String paragraphListStr = getparaParagraphListStr(c);
+        final String paragraphListStr = getParagraphListStr(c);
         assertEquals("文節数不正 : " + paragraphListStr, 3, c.getParagraphList().size());
 
         assertEquals("文節区切り位置不正 : " + paragraphListStr
@@ -52,7 +51,7 @@ public class ClauseTest {
     @Test
     public void testParagraph3() throws ParagraphException {
         Clause c = new Clause("朝に散歩することにしている。");
-        final String paragraphListStr = getparaParagraphListStr(c);
+        final String paragraphListStr = getParagraphListStr(c);
         assertEquals("文節数不正 : " + paragraphListStr, 5, c.getParagraphList().size());
         assertEquals("文節区切り位置不正 : " + paragraphListStr
                 , Arrays.asList("朝に", "散歩する", "ことに", "して", "いる。")
@@ -90,24 +89,24 @@ public class ClauseTest {
     public void testPredicate1() throws Exception {
         Clause c = new Clause("誰も僕の言うことを信じない。");
         assertEquals("述語判定エラー", "信じない。", c.getPredicate().getParagraph());
-        assertEquals("主語数エラー:" + getparaParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("主語判定エラー" + getparaParagraphListStr(c), "誰も", c.getSubjects().get(0).getParagraph());
+        assertEquals("主語数エラー:" + getParagraphListStr(c), 1, c.getSubjects().size());
+        assertEquals("主語判定エラー" + getParagraphListStr(c), "誰も", c.getSubjects().get(0).getParagraph());
     }
 
     @Test
     public void testPredicate2() throws Exception {
         Clause c = new Clause("あの映画のファンが続編を待ち望んでいる。");
         assertEquals("述語判定エラー", "いる。", c.getPredicate().getParagraph());
-        assertEquals("主語数エラー:" + getparaParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("主語判定エラー" + getparaParagraphListStr(c), "ファンが", c.getSubjects().get(0).getParagraph());
+        assertEquals("主語数エラー:" + getParagraphListStr(c), 1, c.getSubjects().size());
+        assertEquals("主語判定エラー" + getParagraphListStr(c), "ファンが", c.getSubjects().get(0).getParagraph());
     }
 
     @Test
     public void testPredicate3() throws Exception {
         Clause c = new Clause("ああ、きれいだなあ、あの人は。");
         assertEquals("述語判定エラー", "きれいだなあ、", c.getPredicate().getParagraph());
-        assertEquals("主語数エラー:" + getparaParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("主語判定エラー:" + getparaParagraphListStr(c), "人は。", c.getSubjects().get(0).getParagraph());
+        assertEquals("主語数エラー:" + getParagraphListStr(c), 1, c.getSubjects().size());
+        assertEquals("主語判定エラー:" + getParagraphListStr(c), "人は。", c.getSubjects().get(0).getParagraph());
     }
 
     @Test
@@ -121,22 +120,22 @@ public class ClauseTest {
     public void testSimilarity1() throws Exception {
         Clause c = new Clause("これは、もっとも優れた作品の一つだ。");
         List<Paragraph> similarities = c.getSimilarities();
-        assertEquals("修飾語数エラー:" + getparaParagraphListStr(c), 3, similarities.size());
+        assertEquals("修飾語数エラー:" + getParagraphListStr(c), 3, similarities.size());
     }
 
     @Test
     public void testMultiSubject() throws ParagraphException {
         Clause c = new Clause("姉は家の掃除を手伝い、私は部屋でゲームをする。");
-        assertEquals("主語数エラー：" + getparaParagraphListStr(c), 2, c.getSubjects().size());
+        assertEquals("主語数エラー：" + getParagraphListStr(c), 2, c.getSubjects().size());
     }
 
     @Test
     public void testPartsSubject() throws ParagraphException {
         Clause c = new Clause("私が生まれたふるさとは、リンゴの名産地です。");
-        assertEquals("主語数エラー：" + getparaParagraphListStr(c), 1, c.getSubjects().size());
+        assertEquals("主語数エラー：" + getParagraphListStr(c), 1, c.getSubjects().size());
     }
 
-    private String getparaParagraphListStr(Clause c) {
+    private String getParagraphListStr(Clause c) {
         return c.getParagraphList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.joining(PARAGRAPH_CHAR));
     }
 
