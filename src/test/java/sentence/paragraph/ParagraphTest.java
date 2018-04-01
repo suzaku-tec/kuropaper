@@ -1,4 +1,4 @@
-package sentence;
+package sentence.paragraph;
 
 import exception.ParagraphException;
 import org.junit.Test;
