@@ -146,4 +146,12 @@ public class Word {
 	public boolean isAdverbs() {
 		return getPartOfSpeechLevel1().equals("副詞");
 	}
+
+	/**
+	 * 名詞判定
+	 * @return
+	 */
+	public boolean isNoun() {
+		return "名詞".equals(getPartOfSpeechLevel1());
+	}
 }

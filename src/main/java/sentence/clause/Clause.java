@@ -124,7 +124,7 @@ public class Clause {
      * @param paragraphList 文節リスト
      */
     private void analyseSimilarity(List<Paragraph> paragraphList) {
-        paragraphList.stream().reduce(new ArrayList<Paragraph>(), (result, paragraph) -> {
+        ArrayList<Paragraph> lastSimilarit = paragraphList.stream().reduce(new ArrayList<Paragraph>(), (result, paragraph) -> {
             if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType()) || Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
                 if (result.isEmpty()) {
                     return result;
@@ -135,7 +135,7 @@ public class Clause {
             } else {
                 paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
 
-                if(paragraph.isConsecutiveForm() || result.stream().anyMatch(Paragraph::existAdverbs)) {
+                if (paragraph.isConsecutiveForm() || result.stream().anyMatch(Paragraph::existAdverbs)) {
                     paragraph.setSimilarities(result);
                     result = new ArrayList<>();
                     result.add(paragraph);
@@ -149,6 +149,11 @@ public class Clause {
             result1.addAll(result2);
             return result1;
         });
+
+        // 最後の修飾子設定
+        if(!lastSimilarit.isEmpty()) {
+            paragraphList.get(paragraphList.size() -1).setSimilarities(lastSimilarit);
+        }
     }
 
     /**

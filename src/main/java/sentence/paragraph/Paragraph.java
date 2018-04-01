@@ -42,7 +42,9 @@ public class Paragraph {
                 (Paragraph p, Word word) -> {
                     if (isSpritParagraph(word)) {
                         if (word.isIndependence()) {
-                            if (p.getWordList().stream().anyMatch(Word::isIndependence)) {
+                            if(word.isNoun() && p.getWordList().stream().allMatch(Word::isNoun)) {
+                                // すべて名詞の場合、複数の名詞が連結して名詞となっているだけなので、一緒の文節として使う。
+                            } else if (p.getWordList().stream().anyMatch(Word::isIndependence)) {
                                 list.add(p);
                                 p = new Paragraph();
                             }
