@@ -121,6 +121,16 @@ public class ClauseTest {
         Clause c = new Clause("これは、もっとも優れた作品の一つだ。");
         List<Paragraph> similarities = c.getSimilarities();
         assertEquals("修飾語数エラー:" + getParagraphListStr(c), 3, similarities.size());
+
+        Paragraph paragraph = c.getParagraphList().get(2);// 「優れた」の文節を取得
+        assertEquals("修飾語判定エラー", "もっとも", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+
+        paragraph = c.getParagraphList().get(3);// 「優れた」の文節を取得
+        assertEquals("修飾語判定エラー", "優れた", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+
+        paragraph = c.getParagraphList().get(4);// 「一つだ。」の文節を取得
+        assertEquals("修飾語判定エラー", "作品の", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+
     }
 
     @Test
@@ -132,6 +142,7 @@ public class ClauseTest {
     @Test
     public void testPartsSubject() throws ParagraphException {
         Clause c = new Clause("私が生まれたふるさとは、リンゴの名産地です。");
+        System.out.println(c.getSubjects().stream().map(Paragraph::getParagraph).collect(Collectors.joining()));
         assertEquals("主語数エラー：" + getParagraphListStr(c), 1, c.getSubjects().size());
     }
 

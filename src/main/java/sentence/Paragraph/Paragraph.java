@@ -210,4 +210,18 @@ public class Paragraph {
     public boolean existReadingPoint() {
         return wordList.stream().anyMatch(Word::isReadingPoint);
     }
+
+    public boolean isConsecutiveForm() {
+        return wordList.stream().anyMatch(word -> {
+            if("連体詞".equals(word.getPartOfSpeechLevel1())) {
+                return  true;
+            }
+
+            if("連体化".equals(word.getPartOfSpeechLevel2())) {
+                return true;
+            }
+
+            return false;
+        });
+    }
 }

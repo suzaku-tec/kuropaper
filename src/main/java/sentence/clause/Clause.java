@@ -126,19 +126,23 @@ public class Clause {
     private void analyseSimilarity(List<Paragraph> paragraphList) {
         paragraphList.stream().reduce(new ArrayList<Paragraph>(), (result, paragraph) -> {
             if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType()) || Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
-                if (!result.isEmpty()) {
+                if (result.isEmpty()) {
+                    return result;
+                } else {
                     paragraph.setSimilarities(result);
+                    return new ArrayList<>();
                 }
-                return new ArrayList<>();
             } else {
+                paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
 
-                if (result.stream().anyMatch(Paragraph::existAdverbs)) {
+                if(paragraph.isConsecutiveForm() || result.stream().anyMatch(Paragraph::existAdverbs)) {
                     paragraph.setSimilarities(result);
                     result = new ArrayList<>();
+                    result.add(paragraph);
+                } else {
+                    result.add(paragraph);
                 }
 
-                paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
-                result.add(paragraph);
                 return result;
             }
         }, (result1, result2) -> {
