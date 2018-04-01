@@ -137,6 +137,9 @@ public class ClauseTest {
     public void testMultiSubject() throws ParagraphException {
         Clause c = new Clause("姉は家の掃除を手伝い、私は部屋でゲームをする。");
         assertEquals("主語数エラー：" + getParagraphListStr(c), 2, c.getSubjects().size());
+
+        Paragraph paragraph = c.getParagraphList().get(2); // 「掃除を」の文節取得
+        assertEquals("修飾語判定エラー", "家の", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
     }
 
     @Test

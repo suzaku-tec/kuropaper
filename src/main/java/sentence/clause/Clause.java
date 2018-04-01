@@ -135,7 +135,7 @@ public class Clause {
             } else {
                 paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
 
-                if (paragraph.isConsecutiveForm() || result.stream().anyMatch(Paragraph::existAdverbs)) {
+                if (paragraph.isConsecutiveForm() || !paragraph.existAdverbs()) {
                     paragraph.setSimilarities(result);
                     result = new ArrayList<>();
                     result.add(paragraph);
