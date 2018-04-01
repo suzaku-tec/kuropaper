@@ -163,6 +163,25 @@ public class ClauseTest {
         assertEquals("修飾語判定エラー", "リンゴの", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
     }
 
+    /**
+     * 被修飾語のテスト
+     */
+    @Test
+    public void testModifiedWord() throws ParagraphException {
+        Clause c = new Clause("非常に多くの人間が出たり入ったりする。");
+
+        // テスト対象の修飾語である「非常に」を取得
+        Paragraph similate = c.getParagraphList().get(0);
+
+        List<Paragraph> result = c.getParagraphList().stream().parallel()
+                .filter(paragraph -> paragraph.getSimilarities().stream().anyMatch(similate::equals))
+                .collect(Collectors.toList());
+
+        assertEquals(1,result.size());
+        assertEquals("多くの", result.get(0).getParagraph());
+    }
+
+
     private String getParagraphListStr(Clause c) {
         return c.getParagraphList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.joining(PARAGRAPH_CHAR));
     }

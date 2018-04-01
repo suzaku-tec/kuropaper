@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3bdc1f3-697f-4c79-9b65-e58f4ecd1a96" name="デフォルト" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java" afterDir="false" />
+    <list default="true" id="d3bdc1f3-697f-4c79-9b65-e58f4ecd1a96" name="デフォルト" comment="パッケージ名が大文字始まりだったので、小文字始まりに修正">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Sample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Sample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/sentence/clause/ClauseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/sentence/clause/ClauseTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -25,17 +26,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Paragraph.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java">
+      <file leaf-file-name="Paragraph.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/sentence/paragraph/Paragraph.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="189">
+              <caret line="192" column="27" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2324#2325#0" expanded="true" />
-                <element signature="e#2355#2356#0" expanded="true" />
-                <element signature="e#2405#2406#0" expanded="true" />
-                <element signature="e#2445#2446#0" expanded="true" />
+                <element signature="e#2305#2306#0" expanded="true" />
+                <element signature="e#2336#2337#0" expanded="true" />
+                <element signature="e#2386#2387#0" expanded="true" />
+                <element signature="e#2426#2427#0" expanded="true" />
                 <element signature="e#2983#2984#0" expanded="true" />
                 <element signature="e#3049#3050#0" expanded="true" />
                 <element signature="e#5101#5102#0" expanded="true" />
@@ -55,16 +56,7 @@
         <entry file="file://$PROJECT_DIR$/src/test/java/Sample.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ParagraphTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/sentence/ParagraphTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -72,10 +64,12 @@
       <file leaf-file-name="Clause.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sentence/clause/Clause.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+            <state relative-caret-position="280">
+              <caret line="137" column="54" selection-start-line="137" selection-start-column="54" selection-end-line="137" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7704#7705#0" expanded="true" />
+                <element signature="e#7735#7736#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,8 +87,8 @@
       <file leaf-file-name="Word.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Word.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="535">
-              <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+            <state relative-caret-position="198">
+              <caret line="145" column="19" selection-start-line="145" selection-start-column="19" selection-end-line="145" selection-end-column="19" />
               <folding>
                 <element signature="e#122#123#0" expanded="true" />
                 <element signature="e#165#166#0" expanded="true" />
@@ -136,16 +130,18 @@
                 <element signature="e#2444#2445#0" expanded="true" />
                 <element signature="e#2506#2507#0" expanded="true" />
                 <element signature="e#2556#2557#0" expanded="true" />
+                <element signature="e#2611#2612#0" expanded="true" />
+                <element signature="e#2661#2662#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClauseTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ClauseTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/sentence/clause/ClauseTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1317">
-              <caret line="121" column="52" lean-forward="true" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
+            <state relative-caret-position="348">
+              <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -182,6 +178,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/main/java/sentence/Word.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sentence/paragraph/Paragraph.java" />
+        <option value="$PROJECT_DIR$/src/test/java/Sample.java" />
+        <option value="$PROJECT_DIR$/src/main/java/sentence/clause/Clause.java" />
+        <option value="$PROJECT_DIR$/src/test/java/sentence/clause/ClauseTest.java" />
       </list>
     </option>
   </component>
@@ -261,7 +263,7 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="sentence" type="462c0819:PsiDirectoryNode" />
-              <item name="Paragraph" type="462c0819:PsiDirectoryNode" />
+              <item name="paragraph" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="kuropaper" type="b2602c69:ProjectViewProjectNode" />
@@ -293,12 +295,24 @@
               <item name="sentence" type="462c0819:PsiDirectoryNode" />
               <item name="clause" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="kuropaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kuropaper" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="sentence" type="462c0819:PsiDirectoryNode" />
+              <item name="paragraph" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="AndroidView" />
     </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="terminal" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -321,7 +335,7 @@
       <module name="kuropaper_test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sentence.Paragraph.*" />
+          <option name="PATTERN" value="sentence.paragraph.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -340,11 +354,34 @@
       </option>
       <patterns />
     </configuration>
+    <configuration name="ClauseTest.testModifiedWord" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="kuropaper_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sentence.clause.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="sentence.clause" />
+      <option name="MAIN_CLASS_NAME" value="sentence.clause.ClauseTest" />
+      <option name="METHOD_NAME" value="testModifiedWord" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
     <configuration name="ClauseTest.testMultiSubject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="kuropaper_test" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="sentence.Paragraph.*" />
+          <option name="PATTERN" value="sentence.paragraph.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -363,7 +400,7 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="ClauseTest.testPredicate1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ClauseTest.testSimilarity1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="kuropaper_test" />
       <extension name="coverage">
         <pattern>
@@ -375,34 +412,11 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="sentence.clause" />
       <option name="MAIN_CLASS_NAME" value="sentence.clause.ClauseTest" />
-      <option name="METHOD_NAME" value="testPredicate1" />
+      <option name="METHOD_NAME" value="testSimilarity1" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
-    <configuration name="ClauseTest.testPredicate2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="kuropaper_test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="sentence.Paragraph.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="sentence.clause" />
-      <option name="MAIN_CLASS_NAME" value="sentence.clause.ClauseTest" />
-      <option name="METHOD_NAME" value="testPredicate2" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="singleModule" />
@@ -469,18 +483,19 @@
       <method />
     </configuration>
     <list>
-      <item itemvalue="アプリケーション.Sample" />
       <item itemvalue="JUnit.ClauseTest" />
-      <item itemvalue="JUnit.ClauseTest.testPredicate1" />
-      <item itemvalue="JUnit.ClauseTest.testPredicate2" />
       <item itemvalue="JUnit.ClauseTest.testMultiSubject" />
+      <item itemvalue="アプリケーション.Sample" />
+      <item itemvalue="JUnit.ClauseTest.testSimilarity1" />
+      <item itemvalue="JUnit.ClauseTest.testModifiedWord" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ClauseTest" />
+        <item itemvalue="JUnit.ClauseTest.testModifiedWord" />
         <item itemvalue="JUnit.ClauseTest.testMultiSubject" />
-        <item itemvalue="JUnit.ClauseTest.testPredicate2" />
-        <item itemvalue="JUnit.ClauseTest.testPredicate1" />
+        <item itemvalue="JUnit.ClauseTest.testSimilarity1" />
+        <item itemvalue="アプリケーション.Sample" />
       </list>
     </recent_temporary>
   </component>
@@ -502,75 +517,75 @@
       <option name="project" value="LOCAL" />
       <updated>1522537964977</updated>
     </task>
-    <task id="LOCAL-00002" summary="文節の主語・述語の分類付与を実装">
-      <created>1521640111770</created>
+    <task id="LOCAL-00002" summary="不要なローカル設定ファイルを削除">
+      <created>1522538112290</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1521640111770</updated>
+      <updated>1522538112290</updated>
     </task>
-    <task id="LOCAL-00003" summary="文節の主語・述語の分類付与テストを追加&#10;※まだ通ってない">
-      <created>1521642563686</created>
+    <task id="LOCAL-00003" summary="不要なインポート削除&#10;未使用のメソッドを削除">
+      <created>1522538279133</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1521642563686</updated>
+      <updated>1522538279133</updated>
     </task>
-    <task id="LOCAL-00004" summary="重複していたテストをマージ">
-      <created>1521866371933</created>
+    <task id="LOCAL-00004" summary="タイポを修正">
+      <created>1522538438368</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1521866371933</updated>
+      <updated>1522538438368</updated>
     </task>
-    <task id="LOCAL-00005" summary="不要なコンストラクタ削除">
-      <created>1521868784844</created>
+    <task id="LOCAL-00005" summary="修飾語、非修飾語の関係を設定">
+      <created>1522542418345</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1521868784844</updated>
+      <updated>1522542418345</updated>
     </task>
-    <task id="LOCAL-00006" summary="倒置法の文節分け対応">
-      <created>1521868960418</created>
+    <task id="LOCAL-00006" summary="パッケージ名が大文字始まりだったので、小文字始まりに修正">
+      <created>1522542509880</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1521868960418</updated>
+      <updated>1522542509880</updated>
     </task>
-    <task id="LOCAL-00007" summary="主語がない文の対応">
-      <created>1521869353994</created>
+    <task id="LOCAL-00007" summary="複数の名詞の連続を分けないように修正">
+      <created>1522544850469</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1521869353994</updated>
+      <updated>1522544850469</updated>
     </task>
-    <task id="LOCAL-00008" summary="主語・述語の解析を毎回しないように修正">
-      <created>1521873139252</created>
+    <task id="LOCAL-00008" summary="テストクラスのパッケージ構成をsrc配下と一緒にする">
+      <created>1522545011005</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1521873139252</updated>
+      <updated>1522545011005</updated>
     </task>
-    <task id="LOCAL-00009" summary="修飾語の振り分け設定を追加">
-      <created>1521885577676</created>
+    <task id="LOCAL-00009" summary="javadoc追加">
+      <created>1522545583271</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1521885577676</updated>
+      <updated>1522545583271</updated>
     </task>
-    <task id="LOCAL-00010" summary="修飾語の認定方法を修正">
-      <created>1521895164910</created>
+    <task id="LOCAL-00010" summary="修飾語の関連不正があったので修正">
+      <created>1522546194966</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1521895164910</updated>
+      <updated>1522546194966</updated>
     </task>
-    <task id="LOCAL-00011" summary="修飾子と非修飾子の関係を修正">
-      <created>1521898400386</created>
+    <task id="LOCAL-00011" summary="修飾語の関連付けの正当性確認のテストケースを追加">
+      <created>1522546349750</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1521898400386</updated>
+      <updated>1522546349750</updated>
     </task>
     <task id="LOCAL-00012" summary="javadoc修正">
       <created>1521930649056</created>
@@ -635,15 +650,39 @@
       <option name="project" value="LOCAL" />
       <updated>1522535233471</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ClauseTest - 2018.04.01 at 08h 02m 47s.xml">
+    <history-entry file="ClauseTest_testMultiSubject - 2018.04.01 at 10h 26m 59s.xml">
+      <configuration name="ClauseTest.testMultiSubject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest_testMultiSubject - 2018.04.01 at 10h 27m 40s.xml">
+      <configuration name="ClauseTest.testMultiSubject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest_testSimilarity1 - 2018.04.01 at 10h 28m 10s.xml">
+      <configuration name="ClauseTest.testSimilarity1" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest_testMultiSubject - 2018.04.01 at 10h 28m 46s.xml">
+      <configuration name="ClauseTest.testMultiSubject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest_testMultiSubject - 2018.04.01 at 10h 28m 57s.xml">
+      <configuration name="ClauseTest.testMultiSubject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest - 2018.04.01 at 10h 29m 05s.xml">
       <configuration name="ClauseTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="ClauseTest - 2018.04.01 at 08h 05m 45s.xml">
+    <history-entry file="ClauseTest_testMultiSubject - 2018.04.01 at 10h 30m 51s.xml">
+      <configuration name="ClauseTest.testMultiSubject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest_testMultiSubject - 2018.04.01 at 10h 31m 52s.xml">
+      <configuration name="ClauseTest.testMultiSubject" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest - 2018.04.01 at 10h 32m 00s.xml">
       <configuration name="ClauseTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="ClauseTest_testModifiedWord - 2018.04.01 at 10h 46m 34s.xml">
+      <configuration name="ClauseTest.testModifiedWord" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
@@ -654,14 +693,14 @@
       <window_info anchor="bottom" id="Messages" order="2" weight="0.32934782" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5021322" side_tool="true" visible="true" weight="0.3278867" />
+      <window_info anchor="bottom" id="Event Log" order="0" sideWeight="0.5010661" side_tool="true" weight="0.39869282" />
       <window_info anchor="right" id="Maven Projects" order="0" />
-      <window_info anchor="bottom" id="Version Control" order="3" sideWeight="0.4989339" weight="0.32897604" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4978678" visible="true" weight="0.3278867" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.32934782" />
+      <window_info anchor="bottom" id="Version Control" order="3" sideWeight="0.4978678" weight="0.32897604" />
+      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.49733475" visible="true" weight="0.3278867" />
+      <window_info anchor="bottom" id="Terminal" order="4" sideWeight="0.4978678" weight="0.32897604" />
       <window_info anchor="right" id="パレット" order="1" />
       <window_info id="Capture Tool" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.28464818" />
+      <window_info content_ui="combo" id="Project" order="4" visible="true" weight="0.17110874" />
       <window_info id="UI デザイナー" order="1" />
       <window_info anchor="right" id="キャプチャー分析" order="2" />
       <window_info id="デザイナー" order="2" />
@@ -670,7 +709,7 @@
       <window_info anchor="right" id="Ant Build" order="6" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.49946696" weight="0.39869282" />
+      <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.4989339" weight="0.39869282" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="right" id="Commander" order="5" weight="0.4" />
@@ -717,12 +756,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="文節分けの不具合修正&#10;&#10;サ変活用する単語を文節分けで区切らないように修正&#10;句読点で文節分けしないように修正" />
-    <MESSAGE value="文節の主語・述語の分類付与を実装" />
-    <MESSAGE value="文節の主語・述語の分類付与テストを追加&#10;※まだ通ってない" />
-    <MESSAGE value="重複していたテストをマージ" />
-    <MESSAGE value="不要なコンストラクタ削除" />
-    <MESSAGE value="倒置法の文節分け対応" />
     <MESSAGE value="主語がない文の対応" />
     <MESSAGE value="主語・述語の解析を毎回しないように修正" />
     <MESSAGE value="修飾語の振り分け設定を追加" />
@@ -738,10 +771,33 @@
     <MESSAGE value="analize -&gt; analyseに修正" />
     <MESSAGE value="除外対象を追加" />
     <MESSAGE value="リスト内の一時変数にアクセスしているのか、最後の文節にアクセスしているのか分からないので、修正。&#10;リストを使った文節分けの処理を、一時変数を使って整理。" />
-    <option name="LAST_COMMIT_MESSAGE" value="リスト内の一時変数にアクセスしているのか、最後の文節にアクセスしているのか分からないので、修正。&#10;リストを使った文節分けの処理を、一時変数を使って整理。" />
+    <MESSAGE value="不要なローカル設定ファイルを削除" />
+    <MESSAGE value="不要なインポート削除&#10;未使用のメソッドを削除" />
+    <MESSAGE value="タイポを修正" />
+    <MESSAGE value="修飾語、非修飾語の関係を設定" />
+    <MESSAGE value="パッケージ名が大文字始まりだったので、小文字始まりに修正" />
+    <MESSAGE value="複数の名詞の連続を分けないように修正" />
+    <MESSAGE value="テストクラスのパッケージ構成をsrc配下と一緒にする" />
+    <MESSAGE value="javadoc追加" />
+    <MESSAGE value="修飾語の関連不正があったので修正" />
+    <MESSAGE value="修飾語の関連付けの正当性確認のテストケースを追加" />
+    <option name="LAST_COMMIT_MESSAGE" value="修飾語の関連付けの正当性確認のテストケースを追加" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/sentence/clause/Clause.java</url>
+          <line>127</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/ParagraphTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/paragraph/ParagraphTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
@@ -768,6 +824,8 @@
           <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7704#7705#0" expanded="true" />
+            <element signature="e#7735#7736#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -827,20 +885,22 @@
             <element signature="e#2444#2445#0" expanded="true" />
             <element signature="e#2506#2507#0" expanded="true" />
             <element signature="e#2556#2557#0" expanded="true" />
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2661#2662#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/paragraph/Paragraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
           <caret line="55" column="5" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
-            <element signature="e#2405#2406#0" expanded="true" />
-            <element signature="e#2445#2446#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#2426#2427#0" expanded="true" />
             <element signature="e#2983#2984#0" expanded="true" />
             <element signature="e#3049#3050#0" expanded="true" />
             <element signature="e#5101#5102#0" expanded="true" />
@@ -862,7 +922,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/ParagraphTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/paragraph/ParagraphTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
@@ -889,6 +949,8 @@
           <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7704#7705#0" expanded="true" />
+            <element signature="e#7735#7736#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -948,20 +1010,22 @@
             <element signature="e#2444#2445#0" expanded="true" />
             <element signature="e#2506#2507#0" expanded="true" />
             <element signature="e#2556#2557#0" expanded="true" />
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2661#2662#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/paragraph/Paragraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
           <caret line="55" column="5" lean-forward="true" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
-            <element signature="e#2405#2406#0" expanded="true" />
-            <element signature="e#2445#2446#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#2426#2427#0" expanded="true" />
             <element signature="e#2983#2984#0" expanded="true" />
             <element signature="e#3049#3050#0" expanded="true" />
             <element signature="e#5101#5102#0" expanded="true" />
@@ -983,7 +1047,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/ParagraphTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/paragraph/ParagraphTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
@@ -1010,6 +1074,8 @@
           <caret line="28" column="35" selection-start-line="28" selection-start-column="35" selection-end-line="28" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7704#7705#0" expanded="true" />
+            <element signature="e#7735#7736#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1069,20 +1135,22 @@
             <element signature="e#2444#2445#0" expanded="true" />
             <element signature="e#2506#2507#0" expanded="true" />
             <element signature="e#2556#2557#0" expanded="true" />
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2661#2662#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/paragraph/Paragraph.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
           <caret line="76" column="9" lean-forward="true" selection-start-line="71" selection-start-column="24" selection-end-line="76" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
-            <element signature="e#2405#2406#0" expanded="true" />
-            <element signature="e#2445#2446#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#2426#2427#0" expanded="true" />
             <element signature="e#2983#2984#0" expanded="true" />
             <element signature="e#3049#3050#0" expanded="true" />
             <element signature="e#5101#5102#0" expanded="true" />
@@ -1219,10 +1287,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/ParagraphTest.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/paragraph/ParagraphTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
+          <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -1233,34 +1308,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/clause/Clause.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/Sample.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Word.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="77" column="19" selection-start-line="77" selection-start-column="19" selection-end-line="77" selection-end-column="19" />
+        <state relative-caret-position="198">
+          <caret line="145" column="19" selection-start-line="145" selection-start-column="19" selection-end-line="145" selection-end-column="19" />
           <folding>
             <element signature="e#122#123#0" expanded="true" />
             <element signature="e#165#166#0" expanded="true" />
@@ -1302,30 +1360,34 @@
             <element signature="e#2444#2445#0" expanded="true" />
             <element signature="e#2506#2507#0" expanded="true" />
             <element signature="e#2556#2557#0" expanded="true" />
+            <element signature="e#2611#2612#0" expanded="true" />
+            <element signature="e#2661#2662#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/clause/ClauseTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/clause/Clause.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1317">
-          <caret line="121" column="52" lean-forward="true" selection-start-line="121" selection-start-column="52" selection-end-line="121" selection-end-column="52" />
+        <state relative-caret-position="280">
+          <caret line="137" column="54" selection-start-line="137" selection-start-column="54" selection-end-line="137" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7704#7705#0" expanded="true" />
+            <element signature="e#7735#7736#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/Paragraph/Paragraph.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/sentence/paragraph/Paragraph.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="189">
+          <caret line="192" column="27" selection-start-line="192" selection-start-column="27" selection-end-line="192" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2355#2356#0" expanded="true" />
-            <element signature="e#2405#2406#0" expanded="true" />
-            <element signature="e#2445#2446#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2336#2337#0" expanded="true" />
+            <element signature="e#2386#2387#0" expanded="true" />
+            <element signature="e#2426#2427#0" expanded="true" />
             <element signature="e#2983#2984#0" expanded="true" />
             <element signature="e#3049#3050#0" expanded="true" />
             <element signature="e#5101#5102#0" expanded="true" />
@@ -1336,6 +1398,16 @@
             <element signature="e#5532#5533#0" expanded="true" />
             <element signature="e#5574#5575#0" expanded="true" />
             <element signature="e#5645#5646#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/sentence/clause/ClauseTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="182" lean-forward="true" selection-start-line="182" selection-end-line="182" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
