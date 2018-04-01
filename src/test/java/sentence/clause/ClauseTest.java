@@ -140,6 +140,15 @@ public class ClauseTest {
 
         Paragraph paragraph = c.getParagraphList().get(2); // 「掃除を」の文節取得
         assertEquals("修飾語判定エラー", "家の", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+
+        paragraph = c.getParagraphList().get(3); // 「手伝い、」の文節取得
+        assertEquals("修飾語判定エラー", "掃除を", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+
+        paragraph = c.getParagraphList().get(6); // 「ゲームを」の文節取得
+        assertEquals("修飾語判定エラー", "部屋で", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+
+        paragraph = c.getParagraphList().get(7); // 「する。」の文節取得
+        assertEquals("修飾語判定エラー", "ゲームを", paragraph.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
     }
 
     @Test
