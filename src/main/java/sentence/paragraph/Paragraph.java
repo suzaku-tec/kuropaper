@@ -35,6 +35,11 @@ public class Paragraph {
         }
     }
 
+    /**
+     * 文節分け
+     * @param words 単語
+     * @return 文節リスト
+     */
     public static List<Paragraph> convertParagraph(List<Word> words) {
         List<Paragraph> list = new ArrayList<>();
         Paragraph end = words.stream().reduce(
