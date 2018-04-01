@@ -1,6 +1,6 @@
 package sentence.clause;
 
-import sentence.Paragraph.Paragraph;
+import sentence.paragraph.Paragraph;
 
 /**
  * 文の骨格情報

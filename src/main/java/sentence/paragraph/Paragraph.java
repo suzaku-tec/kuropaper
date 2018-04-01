@@ -1,4 +1,4 @@
-package sentence.Paragraph;
+package sentence.paragraph;
 
 import sentence.Word;
 

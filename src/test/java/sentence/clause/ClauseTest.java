@@ -2,7 +2,7 @@ package sentence.clause;
 
 import exception.ParagraphException;
 import org.junit.Test;
-import sentence.Paragraph.Paragraph;
+import sentence.paragraph.Paragraph;
 import sentence.Word;
 
 import java.util.Arrays;

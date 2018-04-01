@@ -1,6 +1,6 @@
 package sentence;
 
-import sentence.Paragraph.Paragraph;
+import sentence.paragraph.Paragraph;
 
 import java.util.ArrayList;
 import java.util.List;

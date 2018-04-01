@@ -3,7 +3,7 @@ package sentence.clause;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import exception.CauseException;
 import exception.ParagraphException;
-import sentence.Paragraph.Paragraph;
+import sentence.paragraph.Paragraph;
 import sentence.Word;
 
 import java.util.*;
