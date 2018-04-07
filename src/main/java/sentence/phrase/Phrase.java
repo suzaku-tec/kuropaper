@@ -1,4 +1,4 @@
-package sentence.paragraph;
+package sentence.phrase;
 
 import sentence.Word;
 
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 /**
  * 文節
  */
-public class Paragraph {
+public class Phrase {
 
     private List<Word> wordList;
 
@@ -19,9 +19,9 @@ public class Paragraph {
     /**
      * 修飾語リスト
      */
-    private List<Paragraph> similarities = Collections.emptyList();
+    private List<Phrase> similarities = Collections.emptyList();
 
-    private Paragraph() {
+    private Phrase() {
         wordList = new ArrayList<>();
     }
 
@@ -41,23 +41,23 @@ public class Paragraph {
      * @param words 単語
      * @return 文節リスト
      */
-    public static List<Paragraph> convertParagraph(List<Word> words) {
-        List<Paragraph> list = new ArrayList<>();
-        Paragraph end = words.stream().reduce(
-                new Paragraph(), // 文節情報を溜めるオブジェクトを生成
-                (Paragraph p, Word word) -> {
+    public static List<Phrase> convertParagraph(List<Word> words) {
+        List<Phrase> list = new ArrayList<>();
+        Phrase end = words.stream().reduce(
+                new Phrase(), // 文節情報を溜めるオブジェクトを生成
+                (Phrase p, Word word) -> {
                     if (isSpritParagraph(word)) {
                         if (word.isIndependence()) {
                             if (word.isNoun() && p.getWordList().stream().allMatch(Word::isNoun)) {
                                 // すべて名詞の場合、複数の名詞が連結して名詞となっているだけなので、一緒の文節として使う。
                             } else if (p.getWordList().stream().anyMatch(Word::isIndependence)) {
                                 list.add(p);
-                                p = new Paragraph();
+                                p = new Phrase();
                             }
                         } else {
                             p.addWord(word);
                             list.add(p);
-                            return new Paragraph();
+                            return new Phrase();
                         }
                     } else if (word.getPartOfSpeechLevel2().equals("読点") || word.getPartOfSpeechLevel2().equals("句点")) {
                         if (p.getParagraph().isEmpty()) {
@@ -175,11 +175,11 @@ public class Paragraph {
         }
 
         public static WorkType getEnum(List<Word> wordList) throws Exception {
-            if (Paragraph.isSubject(wordList)) {
+            if (Phrase.isSubject(wordList)) {
                 return WorkType.SUBJECT;
             }
 
-            if (Paragraph.isPredicate(wordList)) {
+            if (Phrase.isPredicate(wordList)) {
                 return WorkType.PREDICATE;
             }
 
@@ -195,7 +195,7 @@ public class Paragraph {
      *
      * @return 修飾語リスト
      */
-    public List<Paragraph> getSimilarities() {
+    public List<Phrase> getSimilarities() {
         return similarities;
     }
 
@@ -206,7 +206,7 @@ public class Paragraph {
      *
      * @param similarities 修飾語
      */
-    public void setSimilarities(List<Paragraph> similarities) {
+    public void setSimilarities(List<Phrase> similarities) {
         this.similarities = similarities;
     }
 

@@ -1,6 +1,6 @@
 package sentence.clause;
 
-import sentence.paragraph.Paragraph;
+import sentence.phrase.Phrase;
 
 /**
  * 文の骨格情報
@@ -11,10 +11,10 @@ import sentence.paragraph.Paragraph;
 public class Skeleton {
 
     /** 主語 */
-    public Paragraph subject;
+    public Phrase subject;
 
     /** 述語 */
-    public Paragraph predicate;
+    public Phrase predicate;
 
     /**
      * 主語・述語が設定されているか判定する

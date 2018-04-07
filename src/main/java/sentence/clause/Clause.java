@@ -2,7 +2,7 @@ package sentence.clause;
 
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import exception.CauseException;
-import sentence.paragraph.Paragraph;
+import sentence.phrase.Phrase;
 import sentence.Word;
 
 import java.util.*;
@@ -13,26 +13,26 @@ import java.util.stream.Collectors;
  */
 public class Clause {
 
-    List<Paragraph> paragraphList;
+    List<Phrase> phraseList;
 
-    private List<Paragraph> subjects = null;
+    private List<Phrase> subjects = null;
 
-    private List<Paragraph> predicate = null;
+    private List<Phrase> predicate = null;
 
     public Clause(String clause) {
         List<Word> list = Clause.createWordList(clause);
 
-        this.paragraphList = Collections.unmodifiableList(Paragraph.convertParagraph(list));
+        this.phraseList = Collections.unmodifiableList(Phrase.convertParagraph(list));
 
-        analyse(paragraphList);
+        analyse(phraseList);
     }
 
-    private void analyse(List<Paragraph> paragraphList) {
+    private void analyse(List<Phrase> phraseList) {
         subjects = new ArrayList<>();
 
-        predicate = analysePredicate(paragraphList);
+        predicate = analysePredicate(phraseList);
 
-        var skeleton = analyseSkeleton(paragraphList);
+        var skeleton = analyseSkeleton(phraseList);
 
         subjects = skeleton.stream()
                 .filter(list -> !list.isEmpty())
@@ -40,17 +40,17 @@ public class Clause {
                 .filter(sk -> sk.subject != null)
                 .map(sk -> sk.subject).collect(Collectors.toList());
 
-        analyseSimilarity(paragraphList);
+        analyseSimilarity(phraseList);
     }
 
 
-    private Set<List<Skeleton>> analyseSkeleton(List<Paragraph> paragraphList) {
+    private Set<List<Skeleton>> analyseSkeleton(List<Phrase> phraseList) {
         Set<List<Skeleton>> skeletonsSet = new HashSet<>();
         List<Skeleton> skeletons = new ArrayList<>();
         skeletonsSet.add(skeletons);
         var target = new Skeleton();
         skeletons.add(target);
-        for (ListIterator<Paragraph> it = paragraphList.listIterator(paragraphList.size()); it.hasPrevious(); ) {
+        for (ListIterator<Phrase> it = phraseList.listIterator(phraseList.size()); it.hasPrevious(); ) {
             var paragraph = it.previous();
 
             if (paragraph.existReadingPoint()) {
@@ -70,7 +70,7 @@ public class Clause {
                 }
             }
 
-            if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
+            if (Phrase.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
                 if (target.subject == null) {
                     target.subject = paragraph;
                 } else {
@@ -78,7 +78,7 @@ public class Clause {
                     target.subject = paragraph;
                     skeletons.add(target);
                 }
-            } else if (Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
+            } else if (Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
                 if (target.predicate == null) {
                     target.predicate = paragraph;
                 } else {
@@ -117,12 +117,12 @@ public class Clause {
      * <p>
      * フェールセーフではない。。。
      *
-     * @param paragraphList 文節リスト
+     * @param phraseList 文節リスト
      */
-    private void analyseSimilarity(List<Paragraph> paragraphList) {
-        Modification lastSimilar = paragraphList.stream().reduce(new Modification(), (result, paragraph) -> {
+    private void analyseSimilarity(List<Phrase> phraseList) {
+        Modification lastSimilar = phraseList.stream().reduce(new Modification(), (result, paragraph) -> {
 
-            if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
+            if (Phrase.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
                 paragraph.setSimilarities(result.taigen);
                 result.taigen = new ArrayList<>();
 
@@ -133,9 +133,9 @@ public class Clause {
                 }
 
                 return result;
-            } else if (Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
+            } else if (Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
                 if (paragraph.existReadingPoint() || paragraph.existPunctuationMark()) {
-                    List<Paragraph> temp = new ArrayList<>();
+                    List<Phrase> temp = new ArrayList<>();
                     temp.addAll(result.taigen);
                     temp.addAll(result.yougen);
                     paragraph.setSimilarities(temp);
@@ -144,19 +144,19 @@ public class Clause {
                     return result;
                 }
 
-                List<Paragraph> list = result.yougen.stream().filter(p -> !p.isConsecutiveForm()).collect(Collectors.toList());
+                List<Phrase> list = result.yougen.stream().filter(p -> !p.isConsecutiveForm()).collect(Collectors.toList());
                 if (!list.isEmpty()) {
                     paragraph.setSimilarities(list);
                     result.yougen = new ArrayList<>();
                 }
                 return result;
             } else {
-                paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
+                paragraph.setWorkType(Phrase.WorkType.MODIFIER);
 
                 if (paragraph.existAdverbs()) {
                     result.yougen.add(paragraph);
                 } else if (paragraph.existNoun()) {
-                    List<Paragraph> temp = new ArrayList<>();
+                    List<Phrase> temp = new ArrayList<>();
                     temp.addAll(result.taigen);
                     temp.addAll(result.yougen);
                     paragraph.setSimilarities(temp);
@@ -168,7 +168,7 @@ public class Clause {
                     } else if (paragraph.isConsecutiveForm()) {
                         result.taigen.add(paragraph);
                     }
-                } else if (result.yougen.stream().allMatch(Paragraph::existAdverbs)) {
+                } else if (result.yougen.stream().allMatch(Phrase::existAdverbs)) {
                     paragraph.setSimilarities(result.yougen);
                     result.yougen = new ArrayList<>();
 
@@ -187,9 +187,9 @@ public class Clause {
 
         // 最後の修飾子設定
         if (!lastSimilar.taigen.isEmpty() || !lastSimilar.yougen.isEmpty()) {
-            List<Paragraph> temp = lastSimilar.taigen;
+            List<Phrase> temp = lastSimilar.taigen;
             temp.addAll(lastSimilar.yougen);
-            paragraphList.get(paragraphList.size() - 1).setSimilarities(temp);
+            phraseList.get(phraseList.size() - 1).setSimilarities(temp);
         }
     }
 
@@ -198,32 +198,32 @@ public class Clause {
      * <p>
      * 文レベルでの分析を行う。
      *
-     * @param paragraphList 文節リスト
+     * @param phraseList 文節リスト
      * @return 述語リスト
      */
-    private List<Paragraph> analysePredicate(List<Paragraph> paragraphList) {
-        List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
+    private List<Phrase> analysePredicate(List<Phrase> phraseList) {
+        List<Phrase> list = phraseList.stream().filter(paragraph -> Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
         if (list == null || list.size() == 0) {
             throw new CauseException("predicate is not exsist");
         }
 
         list.stream().forEach(paragraph -> {
-            var index = paragraphList.indexOf(paragraph);
+            var index = phraseList.indexOf(paragraph);
 
             if (index < 0) {
                 return;
             }
 
-            if (index == paragraphList.size() - 1) {
+            if (index == phraseList.size() - 1) {
                 // 述語として確定する
                 return;
             }
 
-            Paragraph nextParagraph = paragraphList.get(index + 1);
-            if (nextParagraph.getWordList().stream().anyMatch(word -> "こと".equals(word.getSurface()))) {
+            Phrase nextPhrase = phraseList.get(index + 1);
+            if (nextPhrase.getWordList().stream().anyMatch(word -> "こと".equals(word.getSurface()))) {
                 // 「こと」になっているので、用途としては名詞になる。そのため、述語として扱わない
                 paragraph.setWorkType(null);
-            } else if (nextParagraph.getWordList().stream().anyMatch(word -> "いる".equals(word.getSurface()))) {
+            } else if (nextPhrase.getWordList().stream().anyMatch(word -> "いる".equals(word.getSurface()))) {
                 // 「いる」の場合、セットで述語の動きをするので、「いる」を述語として採用して、今の単語を無効化する。
                 paragraph.setWorkType(null);
             }
@@ -241,7 +241,7 @@ public class Clause {
             paragraph.setWorkType(null);
         });
 
-        list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
+        list = phraseList.stream().filter(paragraph -> Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
         if (list == null || list.size() == 0) {
             throw new CauseException("predicate is not exsist");
         }
@@ -252,11 +252,11 @@ public class Clause {
     /**
      * 文節リストを解析して主語を見つける
      *
-     * @param paragraphList 文節リスト
+     * @param phraseList 文節リスト
      * @return 主語がない場合は、empty
      */
-    private Optional<List<Paragraph>> analyseSubject(List<Paragraph> paragraphList) {
-        List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())).collect(Collectors.toList());
+    private Optional<List<Phrase>> analyseSubject(List<Phrase> phraseList) {
+        List<Phrase> list = phraseList.stream().filter(paragraph -> Phrase.WorkType.SUBJECT.equals(paragraph.getWorkType())).collect(Collectors.toList());
 
         if (list == null || list.isEmpty()) {
             return Optional.empty();
@@ -272,8 +272,8 @@ public class Clause {
      *
      * @return 文節リスト(変更不可)
      */
-    public List<Paragraph> getParagraphList() {
-        return paragraphList;
+    public List<Phrase> getPhraseList() {
+        return phraseList;
     }
 
     /**
@@ -295,7 +295,7 @@ public class Clause {
      *
      * @return 主語
      */
-    public List<Paragraph> getSubjects() {
+    public List<Phrase> getSubjects() {
         return subjects;
     }
 
@@ -304,13 +304,13 @@ public class Clause {
      *
      * @return 述語
      */
-    public List<Paragraph> getPredicate() {
+    public List<Phrase> getPredicate() {
         return predicate;
     }
 
-    public List<Paragraph> getSimilarities() {
-        return paragraphList.stream()
-                .filter(paragraph -> Paragraph.WorkType.MODIFIER.equals(paragraph.getWorkType()))
+    public List<Phrase> getSimilarities() {
+        return phraseList.stream()
+                .filter(paragraph -> Phrase.WorkType.MODIFIER.equals(paragraph.getWorkType()))
                 .collect(Collectors.toList());
     }
 }
@@ -322,9 +322,9 @@ public class Clause {
  */
 class Modification {
 
-    List<Paragraph> taigen;
+    List<Phrase> taigen;
 
-    List<Paragraph> yougen;
+    List<Phrase> yougen;
 
     Modification() {
         taigen = new ArrayList<>();

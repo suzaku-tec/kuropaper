@@ -1,6 +1,6 @@
 package sentence;
 
-import sentence.paragraph.Paragraph;
+import sentence.phrase.Phrase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
  */
 public class Chapter {
 
-    private List<Paragraph> paragraphList;
+    private List<Phrase> phraseList;
 
     public Chapter() {
-        paragraphList = new ArrayList<>();
+        phraseList = new ArrayList<>();
     }
 }
