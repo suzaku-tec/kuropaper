@@ -24,7 +24,7 @@ public class ClauseTest {
 
         assertEquals("文節区切り位置不正 : " + paragraphListStr
                 , Arrays.asList("山路を", "登りながら、", "こう", "考えた。")
-                , c.getPhraseList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.toList()));
+                , c.getPhraseList().stream().map(paragraph -> paragraph.getPharseJpnStr()).collect(Collectors.toList()));
     }
 
     /**
@@ -40,7 +40,7 @@ public class ClauseTest {
 
         assertEquals("文節区切り位置不正 : " + paragraphListStr
                 , Arrays.asList("すぐに", "出発しなければ", "ならない。")
-                , c.getPhraseList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.toList()));
+                , c.getPhraseList().stream().map(paragraph -> paragraph.getPharseJpnStr()).collect(Collectors.toList()));
     }
 
     /**
@@ -55,7 +55,7 @@ public class ClauseTest {
         assertEquals("文節数不正 : " + paragraphListStr, 5, c.getPhraseList().size());
         assertEquals("文節区切り位置不正 : " + paragraphListStr
                 , Arrays.asList("朝に", "散歩する", "ことに", "して", "いる。")
-                , c.getPhraseList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.toList()));
+                , c.getPhraseList().stream().map(paragraph -> paragraph.getPharseJpnStr()).collect(Collectors.toList()));
     }
 
     /**
@@ -89,34 +89,34 @@ public class ClauseTest {
     public void testPredicate1() throws Exception {
         Clause c = new Clause("誰も僕の言うことを信じない。");
         assertEquals("述語数エラー", 1, c.getPredicate().size());
-        assertEquals("述語判定エラー", "信じない。", c.getPredicate().get(0).getParagraph());
+        assertEquals("述語判定エラー", "信じない。", c.getPredicate().get(0).getPharseJpnStr());
         assertEquals("主語数エラー:" + getParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("主語判定エラー" + getParagraphListStr(c), "誰も", c.getSubjects().get(0).getParagraph());
+        assertEquals("主語判定エラー" + getParagraphListStr(c), "誰も", c.getSubjects().get(0).getPharseJpnStr());
     }
 
     @Test
     public void testPredicate2() throws Exception {
         Clause c = new Clause("あの映画のファンが続編を待ち望んでいる。");
         assertEquals("述語数エラー", 1, c.getPredicate().size());
-        assertEquals("述語判定エラー", "いる。", c.getPredicate().get(0).getParagraph());
+        assertEquals("述語判定エラー", "いる。", c.getPredicate().get(0).getPharseJpnStr());
         assertEquals("主語数エラー:" + getParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("主語判定エラー" + getParagraphListStr(c), "ファンが", c.getSubjects().get(0).getParagraph());
+        assertEquals("主語判定エラー" + getParagraphListStr(c), "ファンが", c.getSubjects().get(0).getPharseJpnStr());
     }
 
     @Test
     public void testPredicate3() throws Exception {
         Clause c = new Clause("ああ、きれいだなあ、あの人は。");
         assertEquals("述語数エラー", 1, c.getPredicate().size());
-        assertEquals("述語判定エラー", "きれいだなあ、", c.getPredicate().get(0).getParagraph());
+        assertEquals("述語判定エラー", "きれいだなあ、", c.getPredicate().get(0).getPharseJpnStr());
         assertEquals("主語数エラー:" + getParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("主語判定エラー:" + getParagraphListStr(c), "人は。", c.getSubjects().get(0).getParagraph());
+        assertEquals("主語判定エラー:" + getParagraphListStr(c), "人は。", c.getSubjects().get(0).getPharseJpnStr());
     }
 
     @Test
     public void testPredicate4() throws Exception {
         Clause c = new Clause("山道を登りながら、こう考えた。");
         assertEquals("述語数エラー", 2, c.getPredicate().size());
-        assertEquals("述語判定エラー", Arrays.asList("登りながら、", "考えた。"), c.getPredicate().stream().map(Phrase::getParagraph).collect(Collectors.toList()));
+        assertEquals("述語判定エラー", Arrays.asList("登りながら、", "考えた。"), c.getPredicate().stream().map(Phrase::getPharseJpnStr).collect(Collectors.toList()));
         assertEquals("主語判定エラー", 0, c.getSubjects().size());
     }
 
@@ -127,13 +127,13 @@ public class ClauseTest {
         assertEquals("修飾語数エラー:" + getParagraphListStr(c), 3, similarities.size());
 
         Phrase phrase = c.getPhraseList().get(2);// 「優れた」の文節を取得
-        assertEquals("修飾語判定エラー", "もっとも", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "もっとも", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
         phrase = c.getPhraseList().get(3);// 「作品の」の文節を取得
-        assertEquals("修飾語判定エラー", "優れた", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "優れた", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
         phrase = c.getPhraseList().get(4);// 「一つだ。」の文節を取得
-        assertEquals("修飾語判定エラー", "作品の", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "作品の", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
     }
 
@@ -146,29 +146,29 @@ public class ClauseTest {
         assertEquals("述語数エラー：" + getParagraphListStr(c), 2, c.getPredicate().size());
 
         Phrase phrase = c.getPhraseList().get(2); // 「掃除を」の文節取得
-        assertEquals("修飾語判定エラー", "家の", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "家の", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
         phrase = c.getPhraseList().get(3); // 「手伝い、」の文節取得
-        assertEquals("修飾語判定エラー", "掃除を", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "掃除を", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
         phrase = c.getPhraseList().get(6); // 「ゲームを」の文節取得
-        assertEquals("修飾語判定エラー", "部屋で", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "部屋で", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
         phrase = c.getPhraseList().get(7); // 「する。」の文節取得
-        assertEquals("修飾語判定エラー", "ゲームを", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "ゲームを", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
     }
 
     @Test
     public void testPartsSubject() throws ParagraphException {
         Clause c = new Clause("私が生まれたふるさとは、リンゴの名産地です。");
         assertEquals("主語数エラー：" + getParagraphListStr(c), 1, c.getSubjects().size());
-        assertEquals("述語数エラー：" + getParagraphListStr(c) + ": 述語文節 = " + c.getPredicate().stream().map(Phrase::getParagraph).collect(Collectors.joining("/")), 1, c.getPredicate().size());
+        assertEquals("述語数エラー：" + getParagraphListStr(c) + ": 述語文節 = " + c.getPredicate().stream().map(Phrase::getPharseJpnStr).collect(Collectors.joining("/")), 1, c.getPredicate().size());
 
         Phrase phrase = c.getPhraseList().get(2); // 「ふるさとは、」の文節取得
-        assertEquals("修飾語判定エラー", "生まれた", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "生まれた", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
 
         phrase = c.getPhraseList().get(4); // 「名産地です。」の文節取得
-        assertEquals("修飾語判定エラー", "リンゴの", phrase.getSimilarities().stream().map(p -> p.getParagraph()).collect(Collectors.joining()));
+        assertEquals("修飾語判定エラー", "リンゴの", phrase.getSimilarities().stream().map(p -> p.getPharseJpnStr()).collect(Collectors.joining()));
     }
 
     /**
@@ -186,7 +186,7 @@ public class ClauseTest {
                 .collect(Collectors.toList());
 
         assertEquals(1, result.size());
-        assertEquals("多くの", result.get(0).getParagraph());
+        assertEquals("多くの", result.get(0).getPharseJpnStr());
     }
 
     /**
@@ -204,7 +204,7 @@ public class ClauseTest {
                 .collect(Collectors.toList());
 
         assertEquals(1, result.size());
-        assertEquals("飛ぶ。", result.get(0).getParagraph());
+        assertEquals("飛ぶ。", result.get(0).getPharseJpnStr());
     }
 
     /**
@@ -221,12 +221,12 @@ public class ClauseTest {
                 .filter(paragraph -> paragraph.getSimilarities().stream().anyMatch(similate::equals))
                 .collect(Collectors.toList());
 
-        assertEquals("修飾語数エラー:" + result.stream().map(Phrase::getParagraph).collect(Collectors.joining("-")), 1, result.size());
-        assertEquals("多くの", result.get(0).getParagraph());
+        assertEquals("修飾語数エラー:" + result.stream().map(Phrase::getPharseJpnStr).collect(Collectors.joining("-")), 1, result.size());
+        assertEquals("多くの", result.get(0).getPharseJpnStr());
     }
 
     private String getParagraphListStr(Clause c) {
-        return c.getPhraseList().stream().map(paragraph -> paragraph.getParagraph()).collect(Collectors.joining(PARAGRAPH_CHAR));
+        return c.getPhraseList().stream().map(paragraph -> paragraph.getPharseJpnStr()).collect(Collectors.joining(PARAGRAPH_CHAR));
     }
 
 
