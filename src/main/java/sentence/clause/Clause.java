@@ -2,7 +2,6 @@ package sentence.clause;
 
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import exception.CauseException;
-import exception.ParagraphException;
 import sentence.paragraph.Paragraph;
 import sentence.Word;
 
@@ -18,9 +17,9 @@ public class Clause {
 
     private List<Paragraph> subjects = null;
 
-    private Paragraph predicate = null;
+    private List<Paragraph> predicate = null;
 
-    public Clause(String clause) throws ParagraphException {
+    public Clause(String clause) {
         List<Word> list = Clause.createWordList(clause);
 
         this.paragraphList = Collections.unmodifiableList(Paragraph.convertParagraph(list));
@@ -41,13 +40,9 @@ public class Clause {
                 .filter(sk -> sk.subject != null)
                 .map(sk -> sk.subject).collect(Collectors.toList());
 
-        paragraphList.stream()
-                .filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType()))
-                .filter(paragraph -> !predicate.equals(paragraph))
-                .forEach(paragraph -> paragraph.setWorkType(null));
-
         analyseSimilarity(paragraphList);
     }
+
 
     private Set<List<Skeleton>> analyseSkeleton(List<Paragraph> paragraphList) {
         Set<List<Skeleton>> skeletonsSet = new HashSet<>();
@@ -58,8 +53,8 @@ public class Clause {
         for (ListIterator<Paragraph> it = paragraphList.listIterator(paragraphList.size()); it.hasPrevious(); ) {
             var paragraph = it.previous();
 
-            if(paragraph.existReadingPoint()) {
-                if(isParfectSkeletons(skeletons)) {
+            if (paragraph.existReadingPoint()) {
+                if (isParfectSkeletons(skeletons)) {
                     // 並列の読点と判定する。
                     skeletons = new ArrayList<>();
                     target = new Skeleton();
@@ -67,24 +62,24 @@ public class Clause {
                     skeletonsSet.add(skeletons);
                 }
 
-                if(target.subject == null && target.predicate != null) {
+                if (target.subject == null && target.predicate != null) {
                     var index = skeletons.indexOf(target);
-                    if(0 < index) {
+                    if (0 < index) {
                         target = skeletons.get(index - 1);
                     }
                 }
             }
 
-            if(Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
-                if(target.subject == null) {
+            if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
+                if (target.subject == null) {
                     target.subject = paragraph;
                 } else {
                     target = new Skeleton();
                     target.subject = paragraph;
                     skeletons.add(target);
                 }
-            } else if(Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
-                if(target.predicate == null) {
+            } else if (Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
+                if (target.predicate == null) {
                     target.predicate = paragraph;
                 } else {
                     target = new Skeleton();
@@ -93,12 +88,12 @@ public class Clause {
                 }
             }
 
-            if(target.isPerfect()) {
+            if (target.isPerfect()) {
                 var index = skeletons.indexOf(target) - 1;
                 while (0 < index && skeletons.get(index).isPerfect()) {
                     index--;
                 }
-                if(0 < index) {
+                if (0 < index) {
                     target = skeletons.get(index);
                 }
             }
@@ -109,6 +104,7 @@ public class Clause {
 
     /**
      * 全文が主語述語のセットになっているか判定する
+     *
      * @param skeletons 主語述語セットのリスト
      * @return 判定結果
      */
@@ -124,47 +120,88 @@ public class Clause {
      * @param paragraphList 文節リスト
      */
     private void analyseSimilarity(List<Paragraph> paragraphList) {
-        ArrayList<Paragraph> lastSimilarit = paragraphList.stream().reduce(new ArrayList<Paragraph>(), (result, paragraph) -> {
-            if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType()) || Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
-                if (result.isEmpty()) {
-                    return result;
-                } else {
-                    paragraph.setSimilarities(result);
-                    return new ArrayList<>();
+        Modification lastSimilar = paragraphList.stream().reduce(new Modification(), (result, paragraph) -> {
+
+            if (Paragraph.WorkType.SUBJECT.equals(paragraph.getWorkType())) {
+                paragraph.setSimilarities(result.taigen);
+                result.taigen = new ArrayList<>();
+
+                // 句読点があれば、連体・連用関係なく修飾子として扱う
+                if (paragraph.existReadingPoint() || paragraph.existPunctuationMark()) {
+                    paragraph.setSimilarities(result.yougen);
+                    result.yougen = new ArrayList<>();
                 }
+
+                return result;
+            } else if (Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())) {
+                if (paragraph.existReadingPoint() || paragraph.existPunctuationMark()) {
+                    List<Paragraph> temp = new ArrayList<>();
+                    temp.addAll(result.taigen);
+                    temp.addAll(result.yougen);
+                    paragraph.setSimilarities(temp);
+                    result.taigen = new ArrayList<>();
+                    result.yougen = new ArrayList<>();
+                    return result;
+                }
+
+                List<Paragraph> list = result.yougen.stream().filter(p -> !p.isConsecutiveForm()).collect(Collectors.toList());
+                if (!list.isEmpty()) {
+                    paragraph.setSimilarities(list);
+                    result.yougen = new ArrayList<>();
+                }
+                return result;
             } else {
                 paragraph.setWorkType(Paragraph.WorkType.MODIFIER);
 
-                if (paragraph.isConsecutiveForm() || !paragraph.existAdverbs()) {
-                    paragraph.setSimilarities(result);
-                    result = new ArrayList<>();
-                    result.add(paragraph);
+                if (paragraph.existAdverbs()) {
+                    result.yougen.add(paragraph);
+                } else if (paragraph.existNoun()) {
+                    List<Paragraph> temp = new ArrayList<>();
+                    temp.addAll(result.taigen);
+                    temp.addAll(result.yougen);
+                    paragraph.setSimilarities(temp);
+                    result.taigen = new ArrayList<>();
+                    result.yougen = new ArrayList<>();
+
+                    if (paragraph.isConjugationForm()) {
+                        result.yougen.add(paragraph);
+                    } else if (paragraph.isConsecutiveForm()) {
+                        result.taigen.add(paragraph);
+                    }
+                } else if (result.yougen.stream().allMatch(Paragraph::existAdverbs)) {
+                    paragraph.setSimilarities(result.yougen);
+                    result.yougen = new ArrayList<>();
+
+                    if (paragraph.isConjugationForm()) {
+                        result.yougen.add(paragraph);
+                    } else if (paragraph.isConsecutiveForm()) {
+                        result.taigen.add(paragraph);
+                    }
                 } else {
-                    result.add(paragraph);
+                    result.taigen.add(paragraph);
                 }
 
                 return result;
             }
-        }, (result1, result2) -> {
-            result1.addAll(result2);
-            return result1;
-        });
+        }, (Modification result1, Modification result2) -> null);
 
         // 最後の修飾子設定
-        if(!lastSimilarit.isEmpty()) {
-            paragraphList.get(paragraphList.size() -1).setSimilarities(lastSimilarit);
+        if (!lastSimilar.taigen.isEmpty() || !lastSimilar.yougen.isEmpty()) {
+            List<Paragraph> temp = lastSimilar.taigen;
+            temp.addAll(lastSimilar.yougen);
+            paragraphList.get(paragraphList.size() - 1).setSimilarities(temp);
         }
     }
 
     /**
      * 述語の分析
-     *
+     * <p>
      * 文レベルでの分析を行う。
      *
      * @param paragraphList 文節リスト
      * @return 述語リスト
      */
-    private Paragraph analysePredicate(List<Paragraph> paragraphList) {
+    private List<Paragraph> analysePredicate(List<Paragraph> paragraphList) {
         List<Paragraph> list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
         if (list == null || list.size() == 0) {
             throw new CauseException("predicate is not exsist");
@@ -173,23 +210,35 @@ public class Clause {
         list.stream().forEach(paragraph -> {
             var index = paragraphList.indexOf(paragraph);
 
-            if(index < 0) {
+            if (index < 0) {
                 return;
             }
 
-            if(index == paragraphList.size() - 1) {
+            if (index == paragraphList.size() - 1) {
                 // 述語として確定する
                 return;
             }
 
             Paragraph nextParagraph = paragraphList.get(index + 1);
-            if(nextParagraph.getWordList().stream().anyMatch(word -> "こと".equals(word.getSurface()))) {
+            if (nextParagraph.getWordList().stream().anyMatch(word -> "こと".equals(word.getSurface()))) {
                 // 「こと」になっているので、用途としては名詞になる。そのため、述語として扱わない
                 paragraph.setWorkType(null);
-            } else if(nextParagraph.getWordList().stream().anyMatch(word -> "いる".equals(word.getSurface()))) {
-                // 「いる」にの場合、セットで述語の動きをするので、「いる」を述語として採用して、今の単語を無効化する。
+            } else if (nextParagraph.getWordList().stream().anyMatch(word -> "いる".equals(word.getSurface()))) {
+                // 「いる」の場合、セットで述語の動きをするので、「いる」を述語として採用して、今の単語を無効化する。
                 paragraph.setWorkType(null);
             }
+        });
+
+        // 不要な述語を無効化
+        list.stream().filter(paragraph -> {
+            if (paragraph.existReadingPoint()) {
+                return false;
+            } else if (paragraph.existPunctuationMark()) {
+                return false;
+            }
+            return true;
+        }).forEach(paragraph -> {
+            paragraph.setWorkType(null);
         });
 
         list = paragraphList.stream().filter(paragraph -> Paragraph.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
@@ -197,7 +246,7 @@ public class Clause {
             throw new CauseException("predicate is not exsist");
         }
 
-        return list.get(list.size() - 1);
+        return list;
     }
 
     /**
@@ -255,7 +304,7 @@ public class Clause {
      *
      * @return 述語
      */
-    public Paragraph getPredicate() throws Exception {
+    public List<Paragraph> getPredicate() {
         return predicate;
     }
 
@@ -263,5 +312,17 @@ public class Clause {
         return paragraphList.stream()
                 .filter(paragraph -> Paragraph.WorkType.MODIFIER.equals(paragraph.getWorkType()))
                 .collect(Collectors.toList());
+    }
+}
+
+class Modification {
+
+    public List<Paragraph> taigen;
+
+    public List<Paragraph> yougen;
+
+    public Modification() {
+        taigen = new ArrayList<>();
+        yougen = new ArrayList<>();
     }
 }

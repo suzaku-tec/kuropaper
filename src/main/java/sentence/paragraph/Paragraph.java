@@ -37,6 +37,7 @@ public class Paragraph {
 
     /**
      * 文節分け
+     *
      * @param words 単語
      * @return 文節リスト
      */
@@ -47,7 +48,7 @@ public class Paragraph {
                 (Paragraph p, Word word) -> {
                     if (isSpritParagraph(word)) {
                         if (word.isIndependence()) {
-                            if(word.isNoun() && p.getWordList().stream().allMatch(Word::isNoun)) {
+                            if (word.isNoun() && p.getWordList().stream().allMatch(Word::isNoun)) {
                                 // すべて名詞の場合、複数の名詞が連結して名詞となっているだけなので、一緒の文節として使う。
                             } else if (p.getWordList().stream().anyMatch(Word::isIndependence)) {
                                 list.add(p);
@@ -147,6 +148,10 @@ public class Paragraph {
                 return true;
             } else if (word.getPartOfSpeechLevel1().equals("助動詞")) {
                 return true;
+            } else if (word.getPartOfSpeechLevel1().equals("形容詞")) {
+                return true;
+            } else if (word.getPartOfSpeechLevel1().equals("形容動詞")) {
+                return true;
             } else {
                 return false;
             }
@@ -214,21 +219,147 @@ public class Paragraph {
         return wordList.stream().anyMatch(Word::isAdverbs);
     }
 
+    /**
+     * 読点存在判定
+     *
+     * @return
+     */
     public boolean existReadingPoint() {
         return wordList.stream().anyMatch(Word::isReadingPoint);
     }
 
+    /**
+     * 句点の存在判定
+     *
+     * @return
+     */
+    public boolean existPunctuationMark() {
+        return wordList.stream().anyMatch(Word::isPunctuationMark);
+    }
+
+    /**
+     * 連体詞判定
+     *
+     * @return true:連体詞 false:連体詞以外
+     */
     public boolean isConsecutiveForm() {
         return wordList.stream().anyMatch(word -> {
-            if("連体詞".equals(word.getPartOfSpeechLevel1())) {
-                return  true;
+            if ("連体詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
             }
 
-            if("連体化".equals(word.getPartOfSpeechLevel2())) {
+            if ("連体化".equals(word.getPartOfSpeechLevel2())) {
+                return true;
+            }
+
+            if ("助詞".equals(word.getPartOfSpeechLevel1())) {
                 return true;
             }
 
             return false;
         });
+    }
+
+    /**
+     * 連用形の条件を見対しているか判定する
+     *
+     * @return
+     */
+    public boolean isConjugationForm() {
+        return wordList.stream().anyMatch(word -> {
+            if ("連用形".equals(word.getConjugationForm())) {
+                return true;
+            }
+
+            if ("動詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
+            }
+
+            if ("形容詞".equals(word.getPartOfSpeechLevel2())) {
+                return true;
+            }
+
+            if ("形容動詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
+            }
+
+            if ("助動詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
+            }
+
+            if ("格助詞".equals(word.getPartOfSpeechLevel2()) && (
+                    "を".equals(word.getSurface()) ||
+                            "に".equals(word.getSurface()) ||
+                            "へ".equals(word.getSurface()) ||
+                            "で".equals(word.getSurface()))) {
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    /**
+     * 用言判定
+     *
+     * @return
+     */
+    public boolean isYougen() {
+        return wordList.stream().anyMatch(word -> {
+            if ("動詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
+            }
+
+            if ("形容詞".equals(word.getPartOfSpeechLevel2())) {
+                return true;
+            }
+
+            if ("形容動詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
+            }
+
+            if ("助動詞".equals(word.getPartOfSpeechLevel1())) {
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    /**
+     * 体言判定
+     *
+     * @return
+     */
+    public boolean isTaigen() {
+        return wordList.stream().allMatch(word -> {
+            if (word.isNoun()) {
+                return true;
+            }
+
+            if (word.isParticle()) {
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    /**
+     * 動詞の存在判定
+     *
+     * @return
+     */
+    public boolean existsVerb() {
+        return wordList.stream().anyMatch(Word::isVerb);
+    }
+
+    /**
+     * 名詞の存在判定
+     *
+     * @return
+     */
+    public boolean existNoun() {
+        return wordList.stream().anyMatch(Word::isNoun);
     }
 }
