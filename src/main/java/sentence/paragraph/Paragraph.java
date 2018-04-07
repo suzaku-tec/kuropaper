@@ -113,7 +113,7 @@ public class Paragraph {
     }
 
     public String getParagraph() {
-        return wordList.stream().map(word -> word.getSurface()).collect(Collectors.joining());
+        return wordList.stream().map(Word::getSurface).collect(Collectors.joining());
     }
 
     private WorkType analyse() throws Exception {
@@ -231,7 +231,7 @@ public class Paragraph {
     /**
      * 句点の存在判定
      *
-     * @return
+     * @return 判定結果 true:存在 false:存在しない
      */
     public boolean existPunctuationMark() {
         return wordList.stream().anyMatch(Word::isPunctuationMark);
@@ -261,9 +261,9 @@ public class Paragraph {
     }
 
     /**
-     * 連用形の条件を見対しているか判定する
+     * 連用形か判定する
      *
-     * @return
+     * @return true:連用形 false:連用形以外
      */
     public boolean isConjugationForm() {
         return wordList.stream().anyMatch(word -> {
@@ -302,7 +302,7 @@ public class Paragraph {
     /**
      * 用言判定
      *
-     * @return
+     * @return true:用言 false:用言ではない
      */
     public boolean isYougen() {
         return wordList.stream().anyMatch(word -> {
@@ -329,7 +329,7 @@ public class Paragraph {
     /**
      * 体言判定
      *
-     * @return
+     * @return 判定結果 true:体言 false:体言ではない
      */
     public boolean isTaigen() {
         return wordList.stream().allMatch(word -> {
@@ -348,7 +348,7 @@ public class Paragraph {
     /**
      * 動詞の存在判定
      *
-     * @return
+     * @return 判定結果 true:存在 false:存在しない
      */
     public boolean existsVerb() {
         return wordList.stream().anyMatch(Word::isVerb);
@@ -357,7 +357,7 @@ public class Paragraph {
     /**
      * 名詞の存在判定
      *
-     * @return
+     * @return 判定結果 true:存在 false:存在しない
      */
     public boolean existNoun() {
         return wordList.stream().anyMatch(Word::isNoun);
