@@ -126,7 +126,7 @@ public class Paragraph {
      * @param wordList 文節の文言
      * @return 判定結果
      */
-    public static boolean isSubject(List<Word> wordList) {
+    private static boolean isSubject(List<Word> wordList) {
         return wordList.stream().filter(Word::isParticle).anyMatch(word -> {
             if (word.getSurface().equals("は") || word.getSurface().equals("が") || word.getSurface().equals("も") && !word.getPartOfSpeechLevel1().equals("動詞")) {
                 return true;
@@ -142,7 +142,7 @@ public class Paragraph {
      * @param wordList 文節の文言
      * @return 判定結果
      */
-    public static boolean isPredicate(List<Word> wordList) {
+    private static boolean isPredicate(List<Word> wordList) {
         return wordList.stream().anyMatch(word -> {
             if (word.getPartOfSpeechLevel1().equals("動詞")) {
                 return true;
@@ -170,7 +170,7 @@ public class Paragraph {
 
         public String japanease;
 
-        private WorkType(String japanease) {
+        WorkType(String japanease) {
             this.japanease = japanease;
         }
 
@@ -222,7 +222,7 @@ public class Paragraph {
     /**
      * 読点存在判定
      *
-     * @return
+     * @return 判定結果 true:存在 false:存在しない
      */
     public boolean existReadingPoint() {
         return wordList.stream().anyMatch(Word::isReadingPoint);
