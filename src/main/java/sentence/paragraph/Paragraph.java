@@ -23,4 +23,7 @@ public class Paragraph {
         return clauseList;
     }
 
+    public boolean existConnection() {
+        return clauseList.stream().anyMatch(clause -> clause.existConjunction());
+    }
 }

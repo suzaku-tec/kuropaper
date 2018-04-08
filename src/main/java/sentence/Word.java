@@ -172,7 +172,11 @@ public class Word {
         return "動詞".equals(getPartOfSpeechLevel1());
     }
 
+    /**
+     * 接続詞判定
+     * @return
+     */
     public boolean isConjunction() {
-        return "接続詞".equals(getPartOfSpeechLevel1());
+        return "接続詞".equals(getPartOfSpeechLevel1()) || ("助詞".equals(getPartOfSpeechLevel1()) && "接続助詞".equals(getPartOfSpeechLevel2()));
     }
 }
