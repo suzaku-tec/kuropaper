@@ -60,7 +60,7 @@ public class Phrase {
                             return new Phrase();
                         }
                     } else if (word.getPartOfSpeechLevel2().equals("読点") || word.getPartOfSpeechLevel2().equals("句点")) {
-                        if (p.getPharseJpnStr().isEmpty()) {
+                        if (p.getPharseStr().isEmpty()) {
                             // 前の文節の一部として扱う
                             list.get(list.size() - 1).addWord(word);
                             return p;
@@ -70,7 +70,7 @@ public class Phrase {
                     return p;
                 }, (o1, o2) -> null);
 
-        if (!end.getPharseJpnStr().isEmpty()) {
+        if (!end.getPharseStr().isEmpty()) {
             list.add(end);
         }
 
@@ -112,7 +112,7 @@ public class Phrase {
         return Collections.unmodifiableList(this.wordList);
     }
 
-    public String getPharseJpnStr() {
+    public String getPharseStr() {
         return wordList.stream().map(Word::getSurface).collect(Collectors.joining());
     }
 

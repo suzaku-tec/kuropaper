@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
  */
 public class Clause {
 
+    private static final String PARAGRAPH_CHAR = "/";
+
     List<Phrase> phraseList;
 
     private List<Phrase> subjects = null;
@@ -237,8 +239,8 @@ public class Clause {
                 return false;
             }
             return true;
-        }).forEach(paragraph -> {
-            paragraph.setWorkType(null);
+        }).forEach(phrase -> {
+            phrase.setWorkType(null);
         });
 
         list = phraseList.stream().filter(paragraph -> Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
@@ -312,6 +314,21 @@ public class Clause {
         return phraseList.stream()
                 .filter(paragraph -> Phrase.WorkType.MODIFIER.equals(paragraph.getWorkType()))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * 文節分け文字列表現
+     *
+     * 各文節を"/"で連結した文字列を返す
+     *
+     * @return 文節分けの文字列表現
+     */
+    public String phraseSplitStr() {
+        return phraseList.stream().map(Phrase::getPharseStr).collect(Collectors.joining(PARAGRAPH_CHAR));
+    }
+
+    public String getPhraseStr() {
+        return phraseList.stream().map(Phrase::getPharseStr).collect(Collectors.joining());
     }
 }
 
