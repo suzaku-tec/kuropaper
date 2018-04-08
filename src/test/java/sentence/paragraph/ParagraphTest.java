@@ -40,4 +40,23 @@ public class ParagraphTest {
         Paragraph paragraph = new Paragraph("おや、ここにお金が落ちているぞ。");
         assertEquals("接続詞の存在エラー", "おや、", paragraph.getDokuritsuPhraseList().stream().map(Phrase::getPharseStr).collect(Collectors.joining()));
     }
+
+    @Test
+    public void testInstructionExist() {
+        Paragraph paragraph = new Paragraph("一つ持つと、あれもこれも欲しくなる。");
+        assertEquals("接続詞の存在エラー", Arrays.asList("あれも","これも"), paragraph.getInstructionPhraseList().stream().map(Phrase::getPharseStr).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void testInstructionExist2() {
+        Paragraph paragraph = new Paragraph("こちらを立てれば、あちらが立たぬ。");
+        assertEquals("接続詞の存在エラー", Arrays.asList("こちらを","あちらが"), paragraph.getInstructionPhraseList().stream().map(Phrase::getPharseStr).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void testInstructionNotExist() {
+        Paragraph paragraph = new Paragraph("ああ、なんてすてきなマンションでしょう。");
+        assertEquals("接続詞の存在エラー", true, paragraph.getInstructionPhraseList().stream().map(Phrase::getPharseStr).collect(Collectors.toList()).isEmpty());
+    }
+
 }

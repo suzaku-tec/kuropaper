@@ -351,6 +351,14 @@ public class Clause {
     public List<Phrase> getDokuritsuPhraseList() {
         return phraseList.stream().filter(Phrase::existDokuritsu).collect(Collectors.toList());
     }
+
+    /**
+     * 指示語を含む文節リストの取得
+     * @return 指示語リスト
+     */
+    public List<Phrase> getInstructionPhraseList() {
+        return phraseList.stream().filter(Phrase::existInstruction).collect(Collectors.toList());
+    }
 }
 
 /**

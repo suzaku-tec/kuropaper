@@ -187,4 +187,12 @@ public class Word {
     public boolean isDokuritsu() {
         return "感動詞".equals(getPartOfSpeechLevel1());
     }
+
+    /**
+     * 指示語判定
+     * @return true:指示語 false:指示語以外
+     */
+    public boolean isInstruction() {
+        return "名詞".equals(getPartOfSpeechLevel1()) && "代名詞".equals(getPartOfSpeechLevel2());
+    }
 }

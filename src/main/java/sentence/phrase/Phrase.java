@@ -370,4 +370,12 @@ public class Phrase {
     public boolean existDokuritsu() {
         return wordList.stream().anyMatch(Word::isDokuritsu);
     }
+
+    /**
+     * 指示語の存在判定
+     * @return 判定結果 true:存在 false:存在しない
+     */
+    public boolean existInstruction() {
+        return wordList.stream().anyMatch(Word::isInstruction);
+    }
 }

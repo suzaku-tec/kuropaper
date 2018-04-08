@@ -31,4 +31,8 @@ public class Paragraph {
     public List<Phrase> getDokuritsuPhraseList() {
         return clauseList.stream().peek(clause -> System.out.println(clause.getPhraseStr())).flatMap(clause -> clause.getDokuritsuPhraseList().stream()).collect(Collectors.toList());
     }
+
+    public List<Phrase> getInstructionPhraseList() {
+        return clauseList.stream().flatMap(clause -> clause.getInstructionPhraseList().stream()).collect(Collectors.toList());
+    }
 }
