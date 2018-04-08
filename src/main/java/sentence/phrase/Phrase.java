@@ -366,4 +366,8 @@ public class Phrase {
     public boolean existConjunction() {
         return wordList.stream().anyMatch(Word::isConjunction);
     }
+
+    public boolean existDokuritsu() {
+        return wordList.stream().anyMatch(Word::isDokuritsu);
+    }
 }

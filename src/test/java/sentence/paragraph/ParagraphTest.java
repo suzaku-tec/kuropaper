@@ -1,6 +1,7 @@
 package sentence.paragraph;
 
 import org.junit.Test;
+import sentence.phrase.Phrase;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -34,4 +35,9 @@ public class ParagraphTest {
         assertEquals("接続詞の存在エラー", true, paragraph.existConnection());
     }
 
+    @Test
+    public void testDokuritsuWordExist() {
+        Paragraph paragraph = new Paragraph("おや、ここにお金が落ちているぞ。");
+        assertEquals("接続詞の存在エラー", "おや、", paragraph.getDokuritsuPhraseList().stream().map(Phrase::getPharseStr).collect(Collectors.joining()));
+    }
 }

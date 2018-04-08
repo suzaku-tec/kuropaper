@@ -174,9 +174,17 @@ public class Word {
 
     /**
      * 接続詞判定
-     * @return
+     * @return true:接続詞 false:接続詞以外
      */
     public boolean isConjunction() {
         return "接続詞".equals(getPartOfSpeechLevel1()) || ("助詞".equals(getPartOfSpeechLevel1()) && "接続助詞".equals(getPartOfSpeechLevel2()));
+    }
+
+    /**
+     * 独立語判定
+     * @return true:独立語 false:独立語以外
+     */
+    public boolean isDokuritsu() {
+        return "感動詞".equals(getPartOfSpeechLevel1());
     }
 }

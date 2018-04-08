@@ -334,6 +334,23 @@ public class Clause {
     public boolean existConjunction() {
         return phraseList.stream().anyMatch(Phrase::existConjunction);
     }
+
+    /**
+     * 独立語の存在判定
+     * @return
+     */
+    public boolean existDokuritsu() {
+        return phraseList.stream().anyMatch(Phrase::existDokuritsu);
+    }
+
+    /**
+     * 独立語を含む文節リストの取得
+     *
+     * @return
+     */
+    public List<Phrase> getDokuritsuPhraseList() {
+        return phraseList.stream().filter(Phrase::existDokuritsu).collect(Collectors.toList());
+    }
 }
 
 /**
