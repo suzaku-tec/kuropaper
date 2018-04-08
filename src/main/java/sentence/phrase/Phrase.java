@@ -362,4 +362,8 @@ public class Phrase {
     public boolean existNoun() {
         return wordList.stream().anyMatch(Word::isNoun);
     }
+
+    public boolean existConjunction() {
+        return wordList.stream().anyMatch(Word::isConjunction);
+    }
 }

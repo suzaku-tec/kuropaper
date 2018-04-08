@@ -225,4 +225,9 @@ public class ClauseTest {
         assertEquals("多くの", result.get(0).getPharseStr());
     }
 
+    @Test
+    public void testConjunction() {
+        Clause c = new Clause("だから、授業に 遅刻した。");
+        assertEquals("接続詞の存在判定エラー", true, c.existConjunction());
+    }
 }

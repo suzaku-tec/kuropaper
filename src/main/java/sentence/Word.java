@@ -165,9 +165,14 @@ public class Word {
 
     /**
      * 動詞判定
+     *
      * @return
      */
     public boolean isVerb() {
         return "動詞".equals(getPartOfSpeechLevel1());
+    }
+
+    public boolean isConjunction() {
+        return "接続詞".equals(getPartOfSpeechLevel1());
     }
 }

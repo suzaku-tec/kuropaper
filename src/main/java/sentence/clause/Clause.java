@@ -330,6 +330,10 @@ public class Clause {
     public String getPhraseStr() {
         return phraseList.stream().map(Phrase::getPharseStr).collect(Collectors.joining());
     }
+
+    public boolean existConjunction() {
+        return phraseList.stream().anyMatch(Phrase::existConjunction);
+    }
 }
 
 /**
