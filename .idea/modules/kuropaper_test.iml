@@ -11,11 +11,12 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="kuropaper_main" />
     <orderEntry type="library" name="Gradle: com.atilika.kuromoji:kuromoji-ipadic:0.9.0" level="project" />
-    <orderEntry type="library" name="Gradle: de.sciss:jawjaw:0.1.0" level="project" />
+    <orderEntry type="library" name="Gradle: de.sciss:ws4j:0.1.0" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: com.atilika.kuromoji:kuromoji-core:0.9.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.xerial:sqlite-jdbc:3.8.11.2" level="project" />
+    <orderEntry type="library" name="Gradle: de.sciss:jawjaw:0.1.0" level="project" />
     <orderEntry type="library" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.xerial:sqlite-jdbc:3.8.11.2" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="kuropaper_main" />
 </module>

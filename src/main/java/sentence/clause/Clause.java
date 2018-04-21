@@ -34,7 +34,7 @@ public class Clause {
 
         predicate = analysePredicate(phraseList);
 
-        var skeleton = analyseSkeleton(phraseList);
+        Set<List<Skeleton>> skeleton = analyseSkeleton(phraseList);
 
         subjects = skeleton.stream()
                 .filter(list -> !list.isEmpty())
@@ -50,10 +50,10 @@ public class Clause {
         Set<List<Skeleton>> skeletonsSet = new HashSet<>();
         List<Skeleton> skeletons = new ArrayList<>();
         skeletonsSet.add(skeletons);
-        var target = new Skeleton();
+        Skeleton target = new Skeleton();
         skeletons.add(target);
         for (ListIterator<Phrase> it = phraseList.listIterator(phraseList.size()); it.hasPrevious(); ) {
-            var paragraph = it.previous();
+            Phrase paragraph = it.previous();
 
             if (paragraph.existReadingPoint()) {
                 if (isParfectSkeletons(skeletons)) {
@@ -65,7 +65,7 @@ public class Clause {
                 }
 
                 if (target.subject == null && target.predicate != null) {
-                    var index = skeletons.indexOf(target);
+                    int index = skeletons.indexOf(target);
                     if (0 < index) {
                         target = skeletons.get(index - 1);
                     }
@@ -91,7 +91,7 @@ public class Clause {
             }
 
             if (target.isPerfect()) {
-                var index = skeletons.indexOf(target) - 1;
+                int index = skeletons.indexOf(target) - 1;
                 while (0 < index && skeletons.get(index).isPerfect()) {
                     index--;
                 }
@@ -210,7 +210,7 @@ public class Clause {
         }
 
         list.stream().forEach(paragraph -> {
-            var index = phraseList.indexOf(paragraph);
+            int index = phraseList.indexOf(paragraph);
 
             if (index < 0) {
                 return;
