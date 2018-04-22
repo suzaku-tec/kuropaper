@@ -1,5 +1,6 @@
 package sentence.paragraph;
 
+import sentence.Word;
 import sentence.clause.Clause;
 import sentence.phrase.Phrase;
 
@@ -18,7 +19,7 @@ public class Paragraph {
 
     /**
      * 段落情報作成
-     *
+     * <p>
      * 文字列の改行コードを失くし、句点で文を分けてClauseクラスのインスタンスを作成する。
      *
      * @param paragraph
@@ -29,6 +30,8 @@ public class Paragraph {
                         .split("(?<=。)"))
                 .map(Clause::new)
                 .collect(Collectors.toList());
+
+        analizeInstructTarget();
     }
 
     public List<Clause> getClauseList() {
@@ -45,5 +48,34 @@ public class Paragraph {
 
     public List<Phrase> getInstructionPhraseList() {
         return clauseList.stream().flatMap(clause -> clause.getInstructionPhraseList().stream()).collect(Collectors.toList());
+    }
+
+    /**
+     * 指示語の対象を選別
+     */
+    private void analizeInstructTarget() {
+        // 指示語リスト取得
+        List<Phrase> instructionList = clauseList.stream()
+                .filter(Clause::existInstruction)
+                .flatMap(clause -> clause.getInstructionPhraseList().stream())
+                .filter(phrase -> phrase.existInstruction())
+                .collect(Collectors.toList());
+
+        instructionList.stream().forEach(phrase ->
+                {
+                    List<Word> target = clauseList.stream()
+                            .filter(clause -> clause.getPhraseList().stream().anyMatch(phrase::equals))
+                            .map(clauseList::indexOf)
+                            .filter(index -> 0 < index)
+                            .map(index -> index - 1)
+                            .map(clauseList::get)
+                            .flatMap(clause -> clause.getSubjects().stream())
+                            .flatMap(p -> p.getWordList().stream())
+                            .filter(word -> word.isNoun())
+                            .collect(Collectors.toList());
+
+                    phrase.setTartgetList(target);
+                }
+        );
     }
 }

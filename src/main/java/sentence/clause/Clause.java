@@ -359,6 +359,15 @@ public class Clause {
     public List<Phrase> getInstructionPhraseList() {
         return phraseList.stream().filter(Phrase::existInstruction).collect(Collectors.toList());
     }
+
+    /**
+     * 指示語の存在判定
+     * @return
+     */
+    public boolean existInstruction() {
+        return phraseList.stream().anyMatch(Phrase::existInstruction);
+    }
+
 }
 
 /**

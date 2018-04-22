@@ -21,6 +21,11 @@ public class Phrase {
      */
     private List<Phrase> similarities = Collections.emptyList();
 
+    /**
+     * 指示語の対象
+     */
+    private List<Word> tartgetList = Collections.emptyList();
+
     private Phrase() {
         wordList = new ArrayList<>();
     }
@@ -377,5 +382,13 @@ public class Phrase {
      */
     public boolean existInstruction() {
         return wordList.stream().anyMatch(Word::isInstruction);
+    }
+
+    public void setTartgetList(List<Word> wordList) {
+        tartgetList = wordList;
+    }
+
+    public List<Word> getTartgetList() {
+        return tartgetList;
     }
 }

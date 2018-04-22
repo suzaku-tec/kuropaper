@@ -1,6 +1,8 @@
 package sentence.paragraph;
 
 import org.junit.Test;
+import sentence.Word;
+import sentence.clause.Clause;
 import sentence.phrase.Phrase;
 
 import java.util.Arrays;
@@ -59,4 +61,12 @@ public class ParagraphTest {
         assertEquals("接続詞の存在エラー", true, paragraph.getInstructionPhraseList().stream().map(Phrase::getPharseStr).collect(Collectors.toList()).isEmpty());
     }
 
+    @Test
+    public void testTargetting() {
+        Paragraph p = new Paragraph("企業は自動車やテレビや冷蔵庫など新らしい製品が次々と発売する。\r\n" +
+                "それらを買うためには古い製品を捨てなければならず捨てたものの大半がゴミになる。");
+        String str = p.getInstructionPhraseList().stream().flatMap(phrase -> phrase.getTartgetList().stream()).map(Word::getSurface).collect(Collectors.joining());
+
+        assertEquals("指示語の対象設定エラー", "製品", str);
+    }
 }
