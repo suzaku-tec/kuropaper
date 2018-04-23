@@ -3,7 +3,7 @@ package sentence.clause;
 import exception.ParagraphException;
 import org.junit.Test;
 import sentence.phrase.Phrase;
-import sentence.Word;
+import sentence.word.Word;
 
 import java.util.Arrays;
 import java.util.List;

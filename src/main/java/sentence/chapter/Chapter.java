@@ -1,4 +1,4 @@
-package sentence;
+package sentence.chapter;
 
 import sentence.phrase.Phrase;
 

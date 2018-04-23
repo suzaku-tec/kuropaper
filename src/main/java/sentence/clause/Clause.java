@@ -3,7 +3,7 @@ package sentence.clause;
 import com.atilika.kuromoji.ipadic.Tokenizer;
 import exception.CauseException;
 import sentence.phrase.Phrase;
-import sentence.Word;
+import sentence.word.Word;
 
 import java.util.*;
 import java.util.stream.Collectors;

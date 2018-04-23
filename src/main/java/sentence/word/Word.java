@@ -1,4 +1,4 @@
-package sentence;
+package sentence.word;
 
 import com.atilika.kuromoji.ipadic.Token;
 

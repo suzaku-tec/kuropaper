@@ -1,6 +1,6 @@
 package sentence.paragraph;
 
-import sentence.Word;
+import sentence.word.Word;
 import sentence.clause.Clause;
 import sentence.phrase.Phrase;
 

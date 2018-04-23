@@ -1,6 +1,6 @@
 package sentence.phrase;
 
-import sentence.Word;
+import sentence.word.Word;
 
 import java.util.ArrayList;
 import java.util.Collections;

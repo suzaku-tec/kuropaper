@@ -1,8 +1,7 @@
 package sentence.paragraph;
 
 import org.junit.Test;
-import sentence.Word;
-import sentence.clause.Clause;
+import sentence.word.Word;
 import sentence.phrase.Phrase;
 
 import java.util.Arrays;
