@@ -22,7 +22,6 @@ public class Paragraph {
      * <p>
      * 文字列の改行コードを失くし、句点で文を分けてClauseクラスのインスタンスを作成する。
      *
-     * @param paragraph
      */
     public Paragraph(String paragraph) {
         clauseList = Stream.of(
@@ -39,7 +38,7 @@ public class Paragraph {
     }
 
     public boolean existConnection() {
-        return clauseList.stream().anyMatch(clause -> clause.existConjunction());
+        return clauseList.stream().anyMatch(Clause::existConjunction);
     }
 
     public List<Phrase> getDokuritsuPhraseList() {
@@ -58,7 +57,7 @@ public class Paragraph {
         List<Phrase> instructionList = clauseList.stream()
                 .filter(Clause::existInstruction)
                 .flatMap(clause -> clause.getInstructionPhraseList().stream())
-                .filter(phrase -> phrase.existInstruction())
+                .filter(Phrase::existInstruction)
                 .collect(Collectors.toList());
 
         instructionList.stream().forEach(phrase ->
@@ -71,7 +70,7 @@ public class Paragraph {
                             .map(clauseList::get)
                             .flatMap(clause -> clause.getSubjects().stream())
                             .flatMap(p -> p.getWordList().stream())
-                            .filter(word -> word.isNoun())
+                            .filter(Word::isNoun)
                             .collect(Collectors.toList());
 
                     phrase.setTartgetList(target);
