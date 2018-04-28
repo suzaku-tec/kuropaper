@@ -195,4 +195,16 @@ public class Word {
     public boolean isInstruction() {
         return "名詞".equals(getPartOfSpeechLevel1()) && "代名詞".equals(getPartOfSpeechLevel2());
     }
+
+    public boolean isQuestion() {
+        return "？".equals(getSurface()) || "?".equals(getSurface());
+    }
+
+    public boolean isExcitement() {
+        return "感動詞".equals(getPartOfSpeechLevel1());
+    }
+
+    public boolean isOrder() {
+        return 0 <= getConjugationForm().indexOf("命令");
+    }
 }

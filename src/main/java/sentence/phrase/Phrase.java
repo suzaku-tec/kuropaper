@@ -391,4 +391,24 @@ public class Phrase {
     public List<Word> getTartgetList() {
         return tartgetList;
     }
+
+    /**
+     * ？マークの存在判定
+     * @return 判定結果 true:存在 false:存在しない
+     */
+    public boolean existQuestionWord() {
+        return wordList.stream().anyMatch(Word::isQuestion);
+    }
+
+    /**
+     * 感動詞の存在判定
+     * @return 判定結果 true:存在 false:存在しない
+     */
+    public boolean existExcitement() {
+        return wordList.stream().anyMatch(Word::isExcitement);
+    }
+
+    public boolean existOrder() {
+        return wordList.stream().anyMatch(Word::isOrder);
+    }
 }

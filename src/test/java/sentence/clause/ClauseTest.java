@@ -230,4 +230,28 @@ public class ClauseTest {
         Clause c = new Clause("だから、授業に 遅刻した。");
         assertEquals("接続詞の存在判定エラー", true, c.existConjunction());
     }
+
+    @Test
+    public void testQuestion() {
+        Clause c = new Clause("あなたはいつも何時に起きますか？");
+        assertEquals("疑問文エラー", Clause.ClauseType.QUESTION, c.getClauseType());
+    }
+
+    @Test
+    public void testExcitement() {
+        Clause c = new Clause("ああ、これはすばらしい作品だね。");
+        assertEquals("感動文エラー", Clause.ClauseType.EXCITEMENT, c.getClauseType());
+    }
+
+    @Test
+    public void testOrder() {
+        Clause c = new Clause("もっと本を読め。");
+        assertEquals("命令文エラー", Clause.ClauseType.ORDER, c.getClauseType());
+    }
+    @Test
+    public void testDeclining() {
+        Clause c = new Clause("あそこが私の通う学校だ。");
+        assertEquals("疑問文エラー", Clause.ClauseType.DECLINING, c.getClauseType());
+    }
+
 }

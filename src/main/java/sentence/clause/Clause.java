@@ -21,6 +21,19 @@ public class Clause {
 
     private List<Phrase> predicate = null;
 
+    private ClauseType type = null;
+
+    /**
+     * 文の種類
+     */
+    public enum ClauseType {
+        DECLINING,
+        QUESTION,
+        EXCITEMENT,
+        ORDER,
+    }
+
+
     public Clause(String clause) {
         List<Word> list = Clause.createWordList(clause);
 
@@ -43,6 +56,31 @@ public class Clause {
                 .map(sk -> sk.subject).collect(Collectors.toList());
 
         analyseSimilarity(phraseList);
+
+        setClauseType();
+    }
+
+    public ClauseType getClauseType() {
+        return type;
+    }
+
+    private void setClauseType() {
+        if(phraseList.stream().anyMatch(Phrase::existQuestionWord)) {
+            this.type = ClauseType.QUESTION;
+            return;
+        }
+
+        if(phraseList.stream().anyMatch(Phrase::existExcitement)) {
+            this.type = ClauseType.EXCITEMENT;
+            return;
+        }
+
+        if(phraseList.stream().anyMatch(Phrase::existOrder)) {
+            this.type = ClauseType.ORDER;
+            return;
+        }
+
+        this.type = ClauseType.DECLINING;
     }
 
 
@@ -245,6 +283,9 @@ public class Clause {
 
         list = phraseList.stream().filter(paragraph -> Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
         if (list == null || list.size() == 0) {
+            if(phraseList.stream().anyMatch(Phrase::existQuestionWord)) {
+                return list;
+            }
             throw new CauseException("predicate is not exsist");
         }
 

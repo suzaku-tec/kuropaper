@@ -9,9 +9,10 @@ import java.util.Set;
 public class Sample {
     public static void main(String[] args) {
         Tokenizer tokenizer = new Tokenizer() ;
-        List<Token> tokens = tokenizer.tokenize("企業は自動車やテレビや冷蔵庫など新らしい製品が次々と発売する。それらを買うためには古い製品を捨てなければならず捨てたものの大半がゴミになる。");
+        List<Token> tokens = tokenizer.tokenize("もっと本を読め。");
         for (Token token : tokens) {
             System.out.println(token.getSurface() + "\t" + token.getAllFeatures());
+            System.out.println(token.getConjugationForm());
         }
 
 //        // "買収"(動詞)という単語から得られる関係の一部をデモします
