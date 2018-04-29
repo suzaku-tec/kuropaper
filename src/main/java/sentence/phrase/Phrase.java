@@ -411,4 +411,18 @@ public class Phrase {
     public boolean existOrder() {
         return wordList.stream().anyMatch(Word::isOrder);
     }
+
+    public String getAllFeatures() {
+        String str = wordList.stream().map(word -> word.getSurface() + ":" + word.getAllFeatures()).collect(Collectors.joining("/ "));
+
+        String detail = " - ";
+        if(isSubject(wordList)) {
+            detail = " S ";
+        } else if(isPredicate(wordList)) {
+            detail = " P ";
+        }
+
+        return getPharseStr() + detail + "{ " + str + " }";
+    }
+
 }

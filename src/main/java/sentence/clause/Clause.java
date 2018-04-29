@@ -277,9 +277,7 @@ public class Clause {
                 return false;
             }
             return true;
-        }).forEach(phrase -> {
-            phrase.setWorkType(null);
-        });
+        }).forEach(phrase -> phrase.setWorkType(null));
 
         list = phraseList.stream().filter(paragraph -> Phrase.WorkType.PREDICATE.equals(paragraph.getWorkType())).collect(Collectors.toList());
         if (list == null || list.size() == 0) {
@@ -407,6 +405,10 @@ public class Clause {
      */
     public boolean existInstruction() {
         return phraseList.stream().anyMatch(Phrase::existInstruction);
+    }
+
+    public String getAllFeatures() {
+        return phraseList.stream().map(Phrase::getAllFeatures).collect(Collectors.joining("\n"));
     }
 
 }

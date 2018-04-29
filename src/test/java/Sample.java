@@ -3,6 +3,8 @@ import com.atilika.kuromoji.ipadic.Tokenizer;
 import edu.cmu.lti.jawjaw.JAWJAW;
 import edu.cmu.lti.jawjaw.db.*;
 import edu.cmu.lti.jawjaw.pobj.*;
+import sentence.clause.Clause;
+
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +19,9 @@ public class Sample {
 
 //        // "買収"(動詞)という単語から得られる関係の一部をデモします
 //        new Sample().run( "買収", POS.v );
+
+        System.out.println(new Clause("もっと本を読め。").getAllFeatures());
+
     }
 
     private void run( String word, POS pos ) {
