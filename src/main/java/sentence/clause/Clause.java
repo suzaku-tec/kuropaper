@@ -15,7 +15,7 @@ public class Clause {
 
     private static final String PARAGRAPH_CHAR = "/";
 
-    List<Phrase> phraseList;
+    private List<Phrase> phraseList;
 
     private List<Phrase> subjects = null;
 

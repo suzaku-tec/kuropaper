@@ -24,7 +24,7 @@ public class Phrase {
     /**
      * 指示語の対象
      */
-    private List<Word> tartgetList = Collections.emptyList();
+    private Phrase tartget = null;
 
     private Phrase() {
         wordList = new ArrayList<>();
@@ -139,6 +139,17 @@ public class Phrase {
                 return false;
             }
         });
+    }
+
+    /**
+     * 主語判定
+     *
+     * この文節が主語であるか判定する
+     *
+     * @return 判定結果 true:主語 false:主語以外
+     */
+    public boolean isSubject() {
+        return WorkType.SUBJECT.equals(workType);
     }
 
     /**
@@ -384,12 +395,12 @@ public class Phrase {
         return wordList.stream().anyMatch(Word::isInstruction);
     }
 
-    public void setTartgetList(List<Word> wordList) {
-        tartgetList = wordList;
+    public void setTartgetPhrase(Phrase phrase) {
+        tartget = phrase;
     }
 
-    public List<Word> getTartgetList() {
-        return tartgetList;
+    public Phrase getTartget() {
+        return tartget;
     }
 
     /**
@@ -415,14 +426,22 @@ public class Phrase {
     public String getAllFeatures() {
         String str = wordList.stream().map(word -> word.getSurface() + ":" + word.getAllFeatures()).collect(Collectors.joining("/ "));
 
-        String detail = " - ";
+        String detail = "-";
         if(isSubject(wordList)) {
-            detail = " S ";
+            detail = "S";
         } else if(isPredicate(wordList)) {
-            detail = " P ";
+            detail = "P";
         }
 
-        return getPharseStr() + detail + "{ " + str + " }";
+        return getPharseStr() + " :[" + detail + "] { " + str + " }";
+    }
+
+    public int getMinWordPosition() {
+        return wordList.stream().map(Word::getPosition).min(Integer::compareTo).orElseThrow(() -> new PhraseException("word position not found"));
+    }
+
+    public int getMaxWordPosition() {
+        return wordList.stream().map(Word::getPosition).max(Integer::compareTo).orElseThrow(() -> new PhraseException("word position not found"));
     }
 
 }

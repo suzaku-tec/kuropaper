@@ -64,8 +64,19 @@ public class ParagraphTest {
     public void testTargetting() {
         Paragraph p = new Paragraph("企業は自動車やテレビや冷蔵庫など新らしい製品が次々と発売する。\r\n" +
                 "それらを買うためには古い製品を捨てなければならず捨てたものの大半がゴミになる。");
-        String str = p.getInstructionPhraseList().stream().flatMap(phrase -> phrase.getTartgetList().stream()).map(Word::getSurface).collect(Collectors.joining());
 
-        assertEquals("指示語の対象設定エラー", "製品", str);
+        String str = p.getInstructionPhraseList().stream().map(phrase -> phrase.getTartget().getPharseStr()).collect(Collectors.joining());
+
+        assertEquals("指示語の対象設定エラー", "製品が", str);
     }
+
+    @Test
+    public void testTargetSameClause() {
+        Paragraph p = new Paragraph("机の上に本があり、それは、母が読んでいたものだ。");
+
+        String str = p.getInstructionPhraseList().stream().map(phrase -> phrase.getTartget().getPharseStr()).collect(Collectors.joining());
+
+        assertEquals("指示語の対象設定エラー", "本が", str);
+    }
+
 }

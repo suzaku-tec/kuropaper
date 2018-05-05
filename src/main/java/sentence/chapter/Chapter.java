@@ -22,4 +22,8 @@ public class Chapter {
     public int paragraphSize() {
         return paragraphList.size();
     }
+
+    public List<Paragraph> getParagraphList() {
+        return paragraphList;
+    }
 }
