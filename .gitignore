@@ -2,3 +2,4 @@
 out/
 .idea/workspace.xml
 src/main/resources/wnjpn-0.9.db
+build/
