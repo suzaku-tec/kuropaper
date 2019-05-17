@@ -16,3 +16,5 @@ wnjpn-0.9.dbは、下記のURLから落としてくる。
 
 http://compling.hss.ntu.edu.sg/wnja/data/1.1/wnjpn.db.gz
 
+# 参考サイト
+https://www.kokugobunpou.com/
