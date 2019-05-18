@@ -413,19 +413,3 @@ public class Clause {
 
 }
 
-/**
- * 修飾子の情報
- *
- * 修飾子の情報を一時的に保持するためのクラス
- */
-class Modification {
-
-    List<Phrase> taigen;
-
-    List<Phrase> yougen;
-
-    Modification() {
-        taigen = new ArrayList<>();
-        yougen = new ArrayList<>();
-    }
-}
